@@ -12,7 +12,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 
 import { clientURLS, adminURLS } from "./configs/environement.js";
-const origin_whitelist = [...adminURLS, ...clientURLS];
+const origin_whitelist = [...adminURLS, ...clientURLS, null];
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 var app = express();
@@ -21,7 +21,7 @@ app.use(
   cors({
     credentials: true,
     origin: function (origin, cb) {
-      if (origin_whitelist.includes(origin)) {
+      if (true || origin_whitelist.includes(origin)) {
         cb(null, true);
       } else {
         cb(new Error("Cors: origin not allowed"));
