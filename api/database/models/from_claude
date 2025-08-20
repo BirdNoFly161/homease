@@ -1,0 +1,847 @@
+// models/User.js
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+
+const userSchema = new mongoose.Schema({
+  // Basic Info
+  firstName: {
+    type: String,
+    required: true,
+    trim: true,
+    maxlength: 50
+  },
+  lastName: {
+    type: String,
+    required: true,
+    trim: true,
+    maxlength: 50
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true,
+    trim: true,
+    match: [/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/, 'Please enter a valid email']
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: 6
+  },
+  phone: {
+    type: String,
+    trim: true,
+    match: [/^\+?[\d\s-()]+$/, 'Please enter a valid phone number']
+  },
+  avatar: {
+    type: String, // URL to profile image
+    default: null
+  },
+  
+  // User Role
+  role: {
+    type: String,
+    enum: ['customer', 'professional', 'admin'],
+    required: true,
+    default: 'customer'
+  },
+  
+  // Professional-specific fields
+  professional: {
+    // Basic professional info
+    title: {
+      type: String,
+      trim: true,
+      maxlength: 100
+    },
+    bio: {
+      type: String,
+      trim: true,
+      maxlength: 1000
+    },
+    hourlyRate: {
+      type: Number,
+      min: 0,
+      max: 10000
+    },
+    currency: {
+      type: String,
+      enum: ['USD', 'EUR', 'GBP', 'CAD', 'AUD'],
+      default: 'USD'
+    },
+    
+    // Skills and categories
+    skills: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Skill'
+    }],
+    
+    // Experience and portfolio
+    experience: {
+      years: {
+        type: Number,
+        min: 0,
+        max: 50
+      },
+      description: {
+        type: String,
+        trim: true,
+        maxlength: 2000
+      }
+    },
+    
+    // Portfolio items
+    portfolio: [{
+      title: {
+        type: String,
+        required: true,
+        trim: true,
+        maxlength: 100
+      },
+      description: {
+        type: String,
+        trim: true,
+        maxlength: 500
+      },
+      imageUrl: String,
+      projectUrl: String,
+      completedAt: Date
+    }],
+    
+    // Certifications
+    certifications: [{
+      name: {
+        type: String,
+        required: true,
+        trim: true,
+        maxlength: 200
+      },
+      issuingOrganization: {
+        type: String,
+        required: true,
+        trim: true,
+        maxlength: 200
+      },
+      issueDate: Date,
+      expiryDate: Date,
+      credentialId: String,
+      credentialUrl: String
+    }],
+    
+    // Availability
+    availability: {
+      hoursPerWeek: {
+        type: Number,
+        min: 1,
+        max: 168
+      },
+      timezone: {
+        type: String,
+        default: 'UTC'
+      },
+      workingHours: {
+        monday: { start: String, end: String, available: { type: Boolean, default: true } },
+        tuesday: { start: String, end: String, available: { type: Boolean, default: true } },
+        wednesday: { start: String, end: String, available: { type: Boolean, default: true } },
+        thursday: { start: String, end: String, available: { type: Boolean, default: true } },
+        friday: { start: String, end: String, available: { type: Boolean, default: true } },
+        saturday: { start: String, end: String, available: { type: Boolean, default: false } },
+        sunday: { start: String, end: String, available: { type: Boolean, default: false } }
+      }
+    },
+    
+    // Verification status
+    verificationStatus: {
+      type: String,
+      enum: ['pending', 'under-review', 'verified', 'rejected'],
+      default: 'pending'
+    },
+    verificationNotes: String,
+    verifiedAt: Date,
+    
+    // Ratings summary (calculated fields)
+    averageRating: {
+      type: Number,
+      default: 0,
+      min: 0,
+      max: 5
+    },
+    totalReviews: {
+      type: Number,
+      default: 0,
+      min: 0
+    },
+    totalBookings: {
+      type: Number,
+      default: 0,
+      min: 0
+    },
+    completedBookings: {
+      type: Number,
+      default: 0,
+      min: 0
+    }
+  },
+  
+  // Account status
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  isEmailVerified: {
+    type: Boolean,
+    default: false
+  },
+  emailVerificationToken: String,
+  emailVerificationExpires: Date,
+  
+  // Password reset
+  passwordResetToken: String,
+  passwordResetExpires: Date,
+  
+  // Timestamps
+  lastLoginAt: Date,
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// Indexes for better query performance
+userSchema.index({ email: 1 });
+userSchema.index({ role: 1 });
+userSchema.index({ 'professional.verificationStatus': 1 });
+userSchema.index({ 'professional.skills': 1 });
+userSchema.index({ 'professional.averageRating': -1 });
+userSchema.index({ 'professional.hourlyRate': 1 });
+
+// Pre-save middleware to hash password
+userSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+  
+  try {
+    const salt = await bcrypt.genSalt(12);
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Update updatedAt on save
+userSchema.pre('save', function(next) {
+  this.updatedAt = Date.now();
+  next();
+});
+
+// Instance method to check password
+userSchema.methods.comparePassword = async function(candidatePassword) {
+  return bcrypt.compare(candidatePassword, this.password);
+};
+
+// Virtual for full name
+userSchema.virtual('fullName').get(function() {
+  return `${this.firstName} ${this.lastName}`;
+});
+
+// Virtual for professional profile completion percentage
+userSchema.virtual('professional.profileCompleteness').get(function() {
+  if (this.role !== 'professional') return 0;
+  
+  let completeness = 0;
+  const prof = this.professional;
+  
+  if (prof.title) completeness += 10;
+  if (prof.bio) completeness += 15;
+  if (prof.hourlyRate) completeness += 10;
+  if (prof.skills && prof.skills.length > 0) completeness += 15;
+  if (prof.experience && prof.experience.description) completeness += 10;
+  if (prof.portfolio && prof.portfolio.length > 0) completeness += 15;
+  if (prof.availability && prof.availability.hoursPerWeek) completeness += 10;
+  if (this.avatar) completeness += 5;
+  if (this.phone) completeness += 5;
+  if (prof.certifications && prof.certifications.length > 0) completeness += 5;
+  
+  return Math.min(completeness, 100);
+});
+
+// Transform output to remove sensitive fields
+userSchema.methods.toJSON = function() {
+  const userObject = this.toObject();
+  delete userObject.password;
+  delete userObject.emailVerificationToken;
+  delete userObject.passwordResetToken;
+  return userObject;
+};
+
+module.exports = mongoose.model('User', userSchema);
+
+// models/Skill.js
+const mongoose = require('mongoose');
+
+const skillSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    maxlength: 100
+  },
+  slug: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true
+  },
+  description: {
+    type: String,
+    trim: true,
+    maxlength: 500
+  },
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Category',
+    required: true
+  },
+  icon: {
+    type: String, // Icon name or URL
+    default: 'code'
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  professionalCount: {
+    type: Number,
+    default: 0,
+    min: 0
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// Indexes
+skillSchema.index({ name: 1 });
+skillSchema.index({ slug: 1 });
+skillSchema.index({ category: 1 });
+skillSchema.index({ professionalCount: -1 });
+
+// Pre-save to generate slug
+skillSchema.pre('save', function(next) {
+  if (this.isModified('name')) {
+    this.slug = this.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+  this.updatedAt = Date.now();
+  next();
+});
+
+module.exports = mongoose.model('Skill', skillSchema);
+
+// models/Category.js
+const mongoose = require('mongoose');
+
+const categorySchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    maxlength: 100
+  },
+  slug: {
+    type: String,
+    required: true,
+    unique: true,
+    lowercase: true
+  },
+  description: {
+    type: String,
+    trim: true,
+    maxlength: 500
+  },
+  icon: {
+    type: String, // Icon name or URL
+    default: 'folder'
+  },
+  color: {
+    type: String, // Hex color code
+    default: '#3B82F6'
+  },
+  isActive: {
+    type: Boolean,
+    default: true
+  },
+  skillCount: {
+    type: Number,
+    default: 0,
+    min: 0
+  },
+  professionalCount: {
+    type: Number,
+    default: 0,
+    min: 0
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// Indexes
+categorySchema.index({ name: 1 });
+categorySchema.index({ slug: 1 });
+categorySchema.index({ professionalCount: -1 });
+
+// Pre-save to generate slug
+categorySchema.pre('save', function(next) {
+  if (this.isModified('name')) {
+    this.slug = this.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  }
+  this.updatedAt = Date.now();
+  next();
+});
+
+module.exports = mongoose.model('Category', categorySchema);
+
+// models/Booking.js
+const mongoose = require('mongoose');
+
+const bookingSchema = new mongoose.Schema({
+  // Participants
+  customer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  professional: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  
+  // Booking details
+  title: {
+    type: String,
+    required: true,
+    trim: true,
+    maxlength: 200
+  },
+  description: {
+    type: String,
+    required: true,
+    trim: true,
+    maxlength: 2000
+  },
+  
+  // Skills requested
+  skills: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Skill'
+  }],
+  
+  // Pricing and duration
+  hourlyRate: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  estimatedHours: {
+    type: Number,
+    required: true,
+    min: 0.5,
+    max: 1000
+  },
+  totalAmount: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  currency: {
+    type: String,
+    enum: ['USD', 'EUR', 'GBP', 'CAD', 'AUD'],
+    default: 'USD'
+  },
+  
+  // Scheduling
+  preferredStartDate: {
+    type: Date,
+    required: true
+  },
+  deadline: Date,
+  actualStartDate: Date,
+  actualEndDate: Date,
+  
+  // Status tracking
+  status: {
+    type: String,
+    enum: ['pending', 'accepted', 'rejected', 'in-progress', 'completed', 'cancelled'],
+    default: 'pending'
+  },
+  
+  // Communication
+  customerNotes: {
+    type: String,
+    trim: true,
+    maxlength: 1000
+  },
+  professionalNotes: {
+    type: String,
+    trim: true,
+    maxlength: 1000
+  },
+  
+  // Response tracking
+  respondedAt: Date,
+  acceptedAt: Date,
+  rejectedAt: Date,
+  completedAt: Date,
+  cancelledAt: Date,
+  cancellationReason: {
+    type: String,
+    trim: true,
+    maxlength: 500
+  },
+  cancelledBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  
+  // Payment tracking (basic)
+  paymentStatus: {
+    type: String,
+    enum: ['pending', 'paid', 'refunded'],
+    default: 'pending'
+  },
+  paymentMethod: String,
+  paymentId: String, // External payment provider ID
+  
+  // Deliverables
+  deliverables: [{
+    name: {
+      type: String,
+      required: true,
+      trim: true
+    },
+    description: String,
+    fileUrl: String,
+    deliveredAt: Date
+  }],
+  
+  // Timestamps
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// Indexes for efficient queries
+bookingSchema.index({ customer: 1, createdAt: -1 });
+bookingSchema.index({ professional: 1, createdAt: -1 });
+bookingSchema.index({ status: 1, createdAt: -1 });
+bookingSchema.index({ preferredStartDate: 1 });
+
+// Update updatedAt on save
+bookingSchema.pre('save', function(next) {
+  this.updatedAt = Date.now();
+  
+  // Set response timestamps based on status changes
+  if (this.isModified('status')) {
+    const now = new Date();
+    
+    switch (this.status) {
+      case 'accepted':
+        if (!this.acceptedAt) this.acceptedAt = now;
+        if (!this.respondedAt) this.respondedAt = now;
+        break;
+      case 'rejected':
+        if (!this.rejectedAt) this.rejectedAt = now;
+        if (!this.respondedAt) this.respondedAt = now;
+        break;
+      case 'completed':
+        if (!this.completedAt) this.completedAt = now;
+        break;
+      case 'cancelled':
+        if (!this.cancelledAt) this.cancelledAt = now;
+        break;
+    }
+  }
+  
+  next();
+});
+
+module.exports = mongoose.model('Booking', bookingSchema);
+
+// models/Review.js
+const mongoose = require('mongoose');
+
+const reviewSchema = new mongoose.Schema({
+  // Participants
+  customer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  professional: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  booking: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Booking',
+    required: true
+  },
+  
+  // Rating (1-5 stars)
+  rating: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 5
+  },
+  
+  // Detailed ratings
+  ratings: {
+    communication: {
+      type: Number,
+      min: 1,
+      max: 5
+    },
+    quality: {
+      type: Number,
+      min: 1,
+      max: 5
+    },
+    timeliness: {
+      type: Number,
+      min: 1,
+      max: 5
+    },
+    professionalism: {
+      type: Number,
+      min: 1,
+      max: 5
+    }
+  },
+  
+  // Written review
+  title: {
+    type: String,
+    trim: true,
+    maxlength: 100
+  },
+  comment: {
+    type: String,
+    required: true,
+    trim: true,
+    maxlength: 1000
+  },
+  
+  // Recommendation
+  wouldRecommend: {
+    type: Boolean,
+    default: true
+  },
+  
+  // Professional response
+  response: {
+    comment: {
+      type: String,
+      trim: true,
+      maxlength: 500
+    },
+    respondedAt: Date
+  },
+  
+  // Moderation
+  isPublic: {
+    type: Boolean,
+    default: true
+  },
+  isFlagged: {
+    type: Boolean,
+    default: false
+  },
+  flagReason: String,
+  moderatedAt: Date,
+  moderatedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  
+  // Helpfulness voting
+  helpfulVotes: {
+    type: Number,
+    default: 0,
+    min: 0
+  },
+  
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// Compound indexes to ensure one review per booking
+reviewSchema.index({ customer: 1, professional: 1, booking: 1 }, { unique: true });
+reviewSchema.index({ professional: 1, createdAt: -1 });
+reviewSchema.index({ customer: 1, createdAt: -1 });
+reviewSchema.index({ rating: -1 });
+
+// Update updatedAt on save
+reviewSchema.pre('save', function(next) {
+  this.updatedAt = Date.now();
+  next();
+});
+
+module.exports = mongoose.model('Review', reviewSchema);
+
+// models/VerificationApplication.js
+const mongoose = require('mongoose');
+
+const verificationApplicationSchema = new mongoose.Schema({
+  professional: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  
+  // Application details
+  applicationDate: {
+    type: Date,
+    default: Date.now
+  },
+  
+  // Interview scheduling
+  interviewScheduled: {
+    type: Boolean,
+    default: false
+  },
+  interviewDate: Date,
+  interviewType: {
+    type: String,
+    enum: ['video', 'phone', 'in-person'],
+    default: 'video'
+  },
+  interviewNotes: {
+    type: String,
+    maxlength: 2000
+  },
+  
+  // Verification process
+  status: {
+    type: String,
+    enum: ['pending', 'interview-scheduled', 'under-review', 'verified', 'rejected'],
+    default: 'pending'
+  },
+  
+  // Admin handling
+  assignedAdmin: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  adminNotes: {
+    type: String,
+    maxlength: 2000
+  },
+  
+  // Decision details
+  verificationDecision: {
+    approved: Boolean,
+    reason: {
+      type: String,
+      maxlength: 1000
+    },
+    decidedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    decidedAt: Date
+  },
+  
+  // Documents submitted
+  documents: [{
+    name: {
+      type: String,
+      required: true
+    },
+    type: {
+      type: String,
+      enum: ['identity', 'certification', 'portfolio', 'reference', 'other'],
+      required: true
+    },
+    url: {
+      type: String,
+      required: true
+    },
+    uploadedAt: {
+      type: Date,
+      default: Date.now
+    },
+    verified: {
+      type: Boolean,
+      default: false
+    }
+  }],
+  
+  // Contact information for interview
+  contactEmail: String,
+  contactPhone: String,
+  preferredInterviewTimes: [String],
+  
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+// Indexes
+verificationApplicationSchema.index({ professional: 1 });
+verificationApplicationSchema.index({ status: 1, applicationDate: -1 });
+verificationApplicationSchema.index({ assignedAdmin: 1 });
+verificationApplicationSchema.index({ interviewDate: 1 });
+
+// Update updatedAt on save
+verificationApplicationSchema.pre('save', function(next) {
+  this.updatedAt = Date.now();
+  next();
+});
+
+module.exports = mongoose.model('VerificationApplication', verificationApplicationSchema);
+
+// models/index.js - Export all models
+module.exports = {
+  User: require('./User'),
+  Skill: require('./Skill'),
+  Category: require('./Category'),
+  Booking: require('./Booking'),
+  Review: require('./Review'),
+  VerificationApplication: require('./VerificationApplication')
+};
