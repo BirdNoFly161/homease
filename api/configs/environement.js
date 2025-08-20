@@ -19,8 +19,8 @@ if (environment != "production") {
   adminURLS = ["http://localhost:5174"];
   MULTER_UPLOAD = "temp/";
 } else {
-  adminURLS = ["https://pressingshop-admin.vercel.app"];
-  clientURLS = ["https://top-pressing.vercel.app"];
+  adminURLS = ["https://homease-admin.vercel.app"];
+  clientURLS = ["https://homease.vercel.app"];
   MULTER_UPLOAD = "/tmp";
 }
 

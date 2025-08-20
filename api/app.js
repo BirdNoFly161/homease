@@ -7,7 +7,6 @@ import passport_middleware from "./middleware/passport.js";
 
 import indexRouter from "./routes/index.js";
 import usersRouter from "./routes/users.js";
-import orderRouter from "./routes/order.js";
 
 import { dirname } from "path";
 import { fileURLToPath } from "url";
@@ -41,6 +40,5 @@ passport_middleware(app);
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-app.use("/order", orderRouter);
 
 export default app;
