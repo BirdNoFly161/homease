@@ -1,5 +1,4 @@
 import { Phone, Mail, MapPin, Facebook } from "lucide-react";
-import contactSrc from "@/assets/contact.png";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { cn } from "@/lib/utils";
@@ -18,12 +17,6 @@ const HeroSection = () => {
   return (
     <div className="relative w-full min-h-screen isolate flex justify-end items-center p-7">
       <div className="absolute w-full h-screen top-0 left-0 -z-30">
-        <img
-          src={contactSrc}
-          alt="Contactez nous !"
-          loading="lazy"
-          className="h-full object-cover"
-        />
       </div>
       <div className="sm:w-[20rem] md:w-[30rem] xl:w-[50rem] z-50">
         <p className="bg-black text-white bg-opacity-50 shadow-2xl shadow-black  lg:shadow-transparent lg:bg-transparent lg:text-black text-lg sm:text-lg md:text-2xl lg:text-3xl xl:text-5xl p-2">
