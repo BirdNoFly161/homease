@@ -1,5 +1,5 @@
-import SearchBar from "../common/SearchBar";
-import Button from "../common/Button";
+import SearchBar from "../../common/SearchBar";
+import Button from "../../common/Button";
 
 const HeroSection = () => {
   return (

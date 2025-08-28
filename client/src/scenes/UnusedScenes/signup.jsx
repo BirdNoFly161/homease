@@ -1,10 +1,10 @@
 import { Formik } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
-import Spinner from "../components/spinner";
+import Spinner from "../../components/unused/spinner";
 import { BiErrorCircle } from "react-icons/bi";
 import { BiCheckCircle } from "react-icons/bi";
-import API from "../api";
+import API from "../../api";
 
 function Signup() {
   return (
