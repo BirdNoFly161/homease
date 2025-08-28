@@ -1,9 +1,3 @@
-import FadeLeft from "@/components/FadeLeft";
-import FadeRight from "@/components/FadeRight";
-import FadeCenter from "@/components/FadeCenter";
-
-
-
 const Landing = () => {
   return (
     <div className="relative flex size-full min-h-screen flex-col bg-[#111714] dark group/design-root overflow-x-hidden" style={{fontFamily: '"Spline Sans", "Noto Sans", sans-serif'}}>

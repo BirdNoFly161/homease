@@ -6,7 +6,3 @@
     --primary: #2077BC;
     --secondary: #3c2b91;
 }
-
-body,html{
-    scroll-snap-type: y mandatory;
-}

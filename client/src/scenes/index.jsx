@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Spinner from "../components/spinner";
 import { Toaster } from "react-hot-toast";
 
-import Navbar from "../components/Navbar";
+import Navbar from "../components/common/NavBar";
 import Sidebar from "../components/Sidebar";
 import Footer from "@/components/ui/Footer";
 
