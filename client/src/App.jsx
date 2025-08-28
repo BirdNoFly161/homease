@@ -1,8 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
-import Root from "./scenes";
-import Landing from "./scenes/landingpage/Landing";
-import Contact from "./scenes/contact";
+import Landing from "./scenes/Landing";
+import BrowseProfessionals from "./scenes/BrowseProfessionals";
 
 import "./App.css";
 
@@ -11,13 +10,11 @@ function App() {
     {
       path: "/",
       element: <Landing />,
-      children: [
-        {
-          path: "/contact",
-          element: <Contact />,
-        },
-      ],
     },
+    {
+      path: "/browse-professionals",
+      element: <BrowseProfessionals/>
+    }
   ]);
 
   return <RouterProvider router={router} />;

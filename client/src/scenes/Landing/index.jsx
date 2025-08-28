@@ -1,8 +1,8 @@
 import Navbar from "@/components/common/Navbar";
-import HeroSection from "@/components/sections/HeroSection";
-import FeaturedProfessionals from "@/components/sections/FeaturedProfessionals";
-import PopularSkills from "@/components/sections/PopularSkills";
-import JoinSection from "@/components/sections/JoinSection";
+import HeroSection from "@/components/sections/Landing/HeroSection";
+import FeaturedProfessionals from "@/components/sections/Landing/FeaturedProfessionals";
+import PopularSkills from "@/components/sections/Landing/PopularSkills";
+import JoinSection from "@/components/sections/Landing/JoinSection";
 
 const Landing = () => {
   return (

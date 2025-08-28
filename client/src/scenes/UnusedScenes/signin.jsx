@@ -1,12 +1,12 @@
 import { Formik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
-import Spinner from "../components/spinner";
+import Spinner from "../../components/unused/spinner";
 import { BiErrorCircle } from "react-icons/bi";
 import { useDispatch } from "react-redux";
-import { setAuthToken } from "../redux/user/userSlice";
-import { setUser } from "../redux/user/userSlice";
-import API from "../api";
+import { setAuthToken } from "../../redux/user/userSlice";
+import { setUser } from "../../redux/user/userSlice";
+import API from "../../api";
 import toast from "react-hot-toast";
 
 function SignIn() {
