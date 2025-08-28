@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 import Root from "./scenes";
-import Landing from "./scenes/landingpage";
+import Landing from "./scenes/landingpage/Landing";
 import Contact from "./scenes/contact";
 
 import "./App.css";
@@ -10,12 +10,8 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Root />,
+      element: <Landing />,
       children: [
-        {
-          path: "/",
-          element: <Landing />,
-        },
         {
           path: "/contact",
           element: <Contact />,
