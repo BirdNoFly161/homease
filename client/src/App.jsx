@@ -2,6 +2,8 @@ import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 import Landing from "./scenes/Landing";
 import BrowseProfessionals from "./scenes/BrowseProfessionals";
+import ProfileLayout from "./scenes/Profile";
+import DashboardLayout from "./scenes/Profile/Dashboard";
 
 import "./App.css";
 
@@ -14,6 +16,16 @@ function App() {
     {
       path: "/browse-professionals",
       element: <BrowseProfessionals/>
+    },
+    {
+      path: "/profile",
+      element: <ProfileLayout/>,
+      children: [
+        {
+          path: "dashboard",
+          element: <DashboardLayout/>,
+        }
+      ]
     }
   ]);
 
