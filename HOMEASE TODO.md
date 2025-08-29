@@ -10,3 +10,4 @@
 
 ## Minor
 	1- main must always contain pt-20 now as a class maybe add it to a global css?
+	2- dashboard svg's were changed to emoji icons by chatgpt... change them back to svgs
