@@ -1,4 +1,4 @@
-	
+## Major	
 	1- check if we can generate a better using stitch
 	2- generate mobile version also using stitch (experimental so u can upload image)
 	3- turn the html into jsx
@@ -7,3 +7,6 @@
 	6- make the ui call these
 	
 	8- variablize the colors and css proprties in the css  and tailwindcss config files
+
+## Minor
+	1- main must always contain pt-20 now as a class maybe add it to a global css?
