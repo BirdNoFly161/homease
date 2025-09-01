@@ -1,14 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { setUser } from "../../redux/user/userSlice";
-import { setAuthToken } from "../../redux/user/userSlice";
-import { navLinks } from "../../constants";
-import { BiMenu } from "react-icons/bi";
-import { BiChevronDown } from "react-icons/bi";
-import { FaUserCircle } from "react-icons/fa";
-import API from "../../api";
+import { Link } from "react-router-dom";
 import { useState } from "react";
-import { ShoppingCart } from 'lucide-react';
 import SearchBar from "./SearchBar";
 import Button from "./Button";
 
@@ -31,7 +22,7 @@ function Navbar() {
         </Link>
         <div className="flex items-center gap-9">
           <Link className="text-white text-sm font-medium leading-normal" to="/browse-professionals">
-            Browse Professionals
+            Browse
           </Link>
           <Link className="text-white text-sm font-medium leading-normal" to="/for-pros">
             For Pros
@@ -45,12 +36,14 @@ function Navbar() {
           <Button variant="primary">Post a request</Button>
 
           {isLoggedIn ? (
-            <div
-              className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-              style={{
-                backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuDhxkOQYQLU0vDN7o0z0Rsd2JMsCdn7UP4lu86T35EyOYb5bBFsaW39tsKOHMPpfeJD_UR0EAjygN7-Oam8FuURsjE9UTUtdGi6e0PfK17mn0ppxRDCt9NTsUZYNsvUHvoxX6sYjIHkIQGLpDChZwDv592kR5j1I1cSmXG4dw8JzmdNXDsDwZAJfUqTNouVvoQUj4XGO3ThA7jJw14o_UN2NUxb1LJx5Zxeuo2VBofloAtFxNMHm1rn2cDm_dCe07OE7AZ2ZYG5Ba64")`,
-              }}
-            ></div>
+            <Link to="/profile/dashboard">
+              <div
+                className="ml-2 bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                style={{
+                  backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuDhxkOQYQLU0vDN7o0z0Rsd2JMsCdn7UP4lu86T35EyOYb5bBFsaW39tsKOHMPpfeJD_UR0EAjygN7-Oam8FuURsjE9UTUtdGi6e0PfK17mn0ppxRDCt9NTsUZYNsvUHvoxX6sYjIHkIQGLpDChZwDv592kR5j1I1cSmXG4dw8JzmdNXDsDwZAJfUqTNouVvoQUj4XGO3ThA7jJw14o_UN2NUxb1LJx5Zxeuo2VBofloAtFxNMHm1rn2cDm_dCe07OE7AZ2ZYG5Ba64")`,
+                }}
+              ></div>
+            </Link>
           ) : (
             <Button variant="secondary" onClick={() => setIsLoggedIn(true)}>
               Log in
