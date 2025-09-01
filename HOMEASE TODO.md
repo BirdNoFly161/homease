@@ -11,3 +11,5 @@
 ## Minor
 	1- main must always contain pt-20 now as a class maybe add it to a global css?
 	2- dashboard svg's were changed to emoji icons by chatgpt... change them back to svgs
+ 	3- lots of sections still have div in it. consider changing them to sections.
+  	4- the home page looks a bit off the left side isnt quiet aligned. Fix.
