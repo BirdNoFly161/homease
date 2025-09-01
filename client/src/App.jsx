@@ -4,6 +4,7 @@ import Landing from "./scenes/Landing";
 import BrowseProfessionals from "./scenes/BrowseProfessionals";
 import ProfileLayout from "./scenes/Profile";
 import DashboardLayout from "./scenes/Profile/Dashboard";
+import Login from "./scenes/Login";
 import UserDetails from "./scenes/UserDetails";
 
 import "./App.css";
@@ -13,6 +14,10 @@ function App() {
     {
       path: "/",
       element: <Landing />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
     },
     {
       path: "/browse-professionals",
