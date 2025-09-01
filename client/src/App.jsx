@@ -5,6 +5,7 @@ import BrowseProfessionals from "./scenes/BrowseProfessionals";
 import ProfileLayout from "./scenes/Profile";
 import DashboardLayout from "./scenes/Profile/Dashboard";
 import Login from "./scenes/Login";
+import UserDetails from "./scenes/UserDetails";
 
 import "./App.css";
 
@@ -31,7 +32,11 @@ function App() {
           element: <DashboardLayout/>,
         }
       ]
-    }
+    },
+    {
+      path: "/u/:userId",
+      element: <UserDetails />,
+    },
   ]);
 
   return <RouterProvider router={router} />;
