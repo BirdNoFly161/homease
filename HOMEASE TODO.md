@@ -5,8 +5,10 @@
 	4- generate all the database models
 	5- make the CRUD  for the models so teyre accessible via api
 	6- make the ui call these
-	
+	/*Dont know why we are skipping 7. But apparently we now hate the number 7*/
 	8- variablize the colors and css proprties in the css  and tailwindcss config files
+ 	9- Add a 404 page.
+	10- When you go to your profile, only the dashboard section has any html. Genereate or design other sections and add them.
 
 ## Minor
 	1- main must always contain pt-20 now as a class maybe add it to a global css?
