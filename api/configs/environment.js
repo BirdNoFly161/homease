@@ -25,6 +25,12 @@ if (environment != "production") {
 }
 
 const secret = process.env.secret || "what is a secret bruh";
+const env_config = {
+  dbUser: process.env.DB_USER,
+  dbPassword: process.env.DB_PASSWORD,
+  dbCluster: process.env.DB_CLUSTER,
+  dbName: process.env.DB_NAME,
+}
 
 export {
   secret,
@@ -33,4 +39,5 @@ export {
   adminURLS,
   BLOB_READ_WRITE_TOKEN,
   MULTER_UPLOAD,
+  env_config
 };

@@ -11,7 +11,7 @@ import usersRouter from "./routes/users.js";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 
-import { clientURLS, adminURLS } from "./configs/environement.js";
+import { clientURLS, adminURLS } from "./configs/environment.js";
 const origin_whitelist = [...adminURLS, ...clientURLS, null];
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
