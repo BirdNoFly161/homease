@@ -5,6 +5,7 @@ import BrowseProfessionals from "./scenes/BrowseProfessionals";
 import ProfileLayout from "./scenes/Profile";
 import DashboardLayout from "./scenes/Profile/Dashboard";
 import Login from "./scenes/Login";
+import Signup from "./scenes/Signup";
 import UserDetails from "./scenes/UserDetails";
 
 import "./App.css";
@@ -18,6 +19,10 @@ function App() {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/signup",
+      element: <Signup />,
     },
     {
       path: "/browse-professionals",
