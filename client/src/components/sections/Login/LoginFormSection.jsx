@@ -1,4 +1,4 @@
-import InputField from "@/components/common/Login/InputField";
+import InputField from "@/components/common/form/InputField";
 import SocialLoginSection from "./SocialLoginSection";
 
 const LoginFormSection = () => (
