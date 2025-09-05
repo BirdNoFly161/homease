@@ -1,6 +1,9 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 
+import { ExperienceSchema } from "./experienceSchema.js";
+import { ReviewSchema } from "./reviewSchema.js";
+
 const { Schema } = mongoose;
 
 const UserSchema = new Schema({
@@ -13,6 +16,8 @@ const UserSchema = new Schema({
   avatar: String,
   role: String,
   description: String,
+  reviews: [ReviewSchema],
+  experiences: [ExperienceSchema]
 });
 
 const User = mongoose.model("User", UserSchema);
