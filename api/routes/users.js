@@ -1,7 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import User from "../database/models/userSchema.js";
-import { secret, BLOB_READ_WRITE_TOKEN } from "../configs/environement.js";
+import { secret, BLOB_READ_WRITE_TOKEN } from "../configs/environment.js";
 import passport from "passport";
 import multer from "multer";
 import fs from "fs";
@@ -9,7 +9,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { put } from "@vercel/blob";
-import { MULTER_UPLOAD } from "../configs/environement.js";
+import { MULTER_UPLOAD } from "../configs/environment.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const upload = multer({ dest: MULTER_UPLOAD });

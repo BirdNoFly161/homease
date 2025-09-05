@@ -1,6 +1,6 @@
 import passport from "passport";
 import { Strategy as JwtStrategy, ExtractJwt } from "passport-jwt";
-import { secret } from "../configs/environement.js";
+import { secret } from "../configs/environment.js";
 import User from "../database/models/userSchema.js";
 
 const cookieExtractor = function (req) {
