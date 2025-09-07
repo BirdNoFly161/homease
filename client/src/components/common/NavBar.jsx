@@ -18,7 +18,7 @@ function Navbar() {
               />
             </svg>
           </div>
-          <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">SkillHub</h2>
+          <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Homease</h2>
         </Link>
         <div className="flex items-center gap-9">
           <Link className="text-white text-sm font-medium leading-normal" to="/browse-professionals">
