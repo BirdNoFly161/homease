@@ -10,7 +10,6 @@ import toast from "react-hot-toast";
 
 const SignupFormSection = () => {
   const phoneRegExp = /^\+213\d{9}?$/
-  const [values, setValues] = useState({})
   return (
     <div className="layout-content-container flex flex-col w-full max-w-none py-5">
       <h2 className="text-white tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">
