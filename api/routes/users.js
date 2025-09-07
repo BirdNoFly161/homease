@@ -26,27 +26,35 @@ router.get("/", async function get_users(req, res) {
   }
 });
 
+
+// this route takes form data 
+// are we sure the front end is sending the correct type of bod yfor each request ? 
 router.post(
   "/register",
   upload.single("profile"),
   async function register_user(req, res) {
     try {
-      const new_user = new User(req.body);
-      console.log("sign up body : ", req.body);
-      console.log("parsed file: ", req.file);
+      if (Object.keys(req.body).length !=0 ) {
+        const new_user = new User(req.body);
+        console.log("sign up body : ", req.body);
+        console.log("parsed file: ", req.file);
 
-      if (req.file) {
-        const { url } = await put(
-          "user/image",
-          fs.readFileSync(path.join("temp/", req.file.filename)),
-          { access: "public", token: BLOB_READ_WRITE_TOKEN },
-        );
+        if (req.file) {
+          const { url } = await put(
+            "user/image",
+            fs.readFileSync(path.join("temp/", req.file.filename)),
+            { access: "public", token: BLOB_READ_WRITE_TOKEN },
+          );
 
-        new_user.image = url;
+          new_user.image = url;
+        }
+
+        await new_user.save();
+        res.status(200).json({ msg: "user created successfully" });
       }
-
-      await new_user.save();
-      res.status(200).json({ msg: "user created successfully" });
+      else{
+        res.status(400).json({msg: "bad request - empty body"})
+      }
     } catch (error) {
       console.log("couldnt register user, error: ", error);
       res.status(500);
@@ -54,10 +62,14 @@ router.post(
   },
 );
 
+
+// this route takes json body not form data
 router.post("/login", async function login_user(req, res) {
   try {
     let user = await User.findOne({ username: req.body.username });
+    console.log(req.body)
     console.log("get user query returned: ", req.body);
+    console.log("found user: ", user)
     if (!user) {
       return res.status(404).json({ msg: "no such user" });
     }
