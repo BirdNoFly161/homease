@@ -45,9 +45,11 @@ function NavBar() {
               ></div>
             </Link>
           ) : (
-            <Button variant="secondary" onClick={() => setIsLoggedIn(true)}>
-              Log in
-            </Button>
+            <Link to="/login">
+              <Button variant="secondary" onClick={() => setIsLoggedIn(true)}>
+                Log in
+              </Button>
+            </Link>
           )}
         </div>
       </div>
