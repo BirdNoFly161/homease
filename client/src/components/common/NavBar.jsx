@@ -7,7 +7,7 @@ function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
-    <header className="fixed top-0 w-full z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#29382f] px-10 py-3 bg-[#111714]">
+    <header className="w-full z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#29382f] px-10 py-3 bg-[#111714]">
       <div className="flex items-center gap-8">
         <Link className="flex items-center gap-4 text-white" to="/">
           <div className="size-4">
