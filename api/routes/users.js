@@ -26,6 +26,16 @@ router.get("/", async function get_users(req, res) {
   }
 });
 
+router.get("/professionals", async function get_professionals(req, res) {
+  try {
+    let users = await User.find({ role: "professional" });
+    res.status(200).json({ data: users, ok: true, msg: 'found users' });
+  } catch (err) {
+    console.log("error querying database");
+    res.status(500);
+  }
+});
+
 
 // this route takes form data 
 // are we sure the front end is sending the correct type of bod yfor each request ? 
@@ -34,7 +44,7 @@ router.post(
   upload.single("profile"),
   async function register_user(req, res) {
     try {
-      if (Object.keys(req.body).length !=0 ) {
+      if (Object.keys(req.body).length != 0) {
         const new_user = new User(req.body);
         console.log("sign up body : ", req.body);
         console.log("parsed file: ", req.file);
@@ -52,8 +62,8 @@ router.post(
         await new_user.save();
         res.status(200).json({ msg: "user created successfully" });
       }
-      else{
-        res.status(400).json({msg: "bad request - empty body"})
+      else {
+        res.status(400).json({ msg: "bad request - empty body" })
       }
     } catch (error) {
       console.log("couldnt register user, error: ", error);

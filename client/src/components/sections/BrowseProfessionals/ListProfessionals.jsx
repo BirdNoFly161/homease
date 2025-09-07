@@ -1,5 +1,8 @@
 import PageSelector from "@/components/common/PageSelector";
+import { useState, useEffect } from "react";
+import API from "@/api";
 
+/*
 const professionals = [
   {
     name: "Sophia Carter",
@@ -47,7 +50,28 @@ const professionals = [
   },
 ];
 
+*/
+
 const ListProfessionals = () => {
+
+  const [professionals, setProfessionals] = useState([]);
+  const [search, setSearch] = useState('');
+
+  async function fetchProfessionals() {
+    try {
+      const { data, ok, msg } = (await API.get("users/professionals")).data;
+      console.log("got data: ", data);
+      if (!ok) return;
+      setProfessionals(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  useEffect(() => {
+    fetchProfessionals();
+  }, []);
+
+
   return (
     <section className="layout-content-container flex flex-col max-w-[960px] flex-1">
       <div className="flex flex-wrap justify-between gap-3 p-4">
@@ -89,11 +113,11 @@ const ListProfessionals = () => {
           <div className="flex items-start gap-4">
             <div
               className="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-[70px] w-fit"
-              style={{ backgroundImage: `url("${pro.image}")` }}
+              style={{ backgroundImage: `url("${pro.avatar}")` }}
             ></div>
             <div className="flex flex-1 flex-col justify-center">
-              <p className="text-white text-base font-medium leading-normal">{pro.name}</p>
-              <p className="text-[#9eb7a8] text-sm font-normal leading-normal">{pro.reviews}</p>
+              <p className="text-white text-base font-medium leading-normal">{pro.firstName} {pro.lastName}</p>
+              <p className="text-[#9eb7a8] text-sm font-normal leading-normal">{pro.reviews[0] ? pro.reviews[0].rating: "Not reviewed yet"}</p>
               <p className="text-[#9eb7a8] text-sm font-normal leading-normal">{pro.description}</p>
             </div>
           </div>

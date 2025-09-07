@@ -17,7 +17,9 @@ const UserSchema = new Schema({
   role: String,
   description: String,
   reviews: [ReviewSchema],
-  experiences: [ExperienceSchema]
+  experiences: [ExperienceSchema],
+  rate: Number,
+  rateType: String
 });
 
 const User = mongoose.model("User", UserSchema);
