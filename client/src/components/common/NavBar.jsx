@@ -3,7 +3,7 @@ import { useState } from "react";
 import SearchBar from "./SearchBar";
 import Button from "./Button";
 
-function Navbar() {
+function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
@@ -55,4 +55,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default NavBar;
