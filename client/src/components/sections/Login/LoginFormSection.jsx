@@ -7,8 +7,8 @@ import API from "@/api";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { setAuthToken } from "@/redux/user/userSlice";
-import { setAuthToken } from "@/redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
+import { setUser } from "@/redux/user/userSlice";
 
 const LoginFormSection = () => {
   const dispatch = useDispatch();
@@ -46,22 +46,29 @@ const LoginFormSection = () => {
           profile: Yup.mixed(),
         })}
         onSubmit={async (values, { setSubmitting }) => {
-          let response = await API.post("/users/login", values);
-          if (response.status === 200) {
-            dispatch(setAuthToken(response.token));
-            //API.setAuthToken(response.token);
-            API.defaults.headers.common['Authorization'] = `Bearer ${response.token}`
-            dispatch(setUser(response.user));
-            setSubmitting(false);
-            console.log(response);
-            navigate("/tasks");
+          try {
+          
+            let response = await API.post("/users/login", values);
+            
+            if (response.status === 200) {
+              //API.setAuthToken(response.token);
+              API.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
+              dispatch(setUser(response.user));
+              console.log("trying to submit sign up with values: ", values);
+              console.log("reponse:", response);
+              setSubmitting(false);
+              dispatch(setAuthToken(response.data.token));
+              console.log(response);
+              navigate("/browse-professionals");
+              toast.success("Logged in");
+            
+            }
+
+
           }
-          console.log("trying to submit sign up with values: ", values);
-          setSubmitting(false);
-          if (response.status === 200) {
-            toast.success("Logged in");
+          catch (error) {
+            console.log(error)
           }
-          console.log(response);
         }}
       >
         {(formik) => (

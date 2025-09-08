@@ -2,9 +2,13 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import SearchBar from "./SearchBar";
 import Button from "./Button";
+import { useDispatch, useSelector} from "react-redux";
 
 function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.currentUser);
+
 
   return (
     <header className="w-full z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#29382f] px-10 py-3 bg-[#111714]">
@@ -35,12 +39,12 @@ function NavBar() {
         <div className="flex gap-2 items-center">
           <Button variant="primary">Post a request</Button>
 
-          {isLoggedIn ? (
+          {user ? (
             <Link to="/profile/dashboard">
               <div
                 className="ml-2 bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
                 style={{
-                  backgroundImage: `url("https://lh3.googleusercontent.com/aida-public/AB6AXuDhxkOQYQLU0vDN7o0z0Rsd2JMsCdn7UP4lu86T35EyOYb5bBFsaW39tsKOHMPpfeJD_UR0EAjygN7-Oam8FuURsjE9UTUtdGi6e0PfK17mn0ppxRDCt9NTsUZYNsvUHvoxX6sYjIHkIQGLpDChZwDv592kR5j1I1cSmXG4dw8JzmdNXDsDwZAJfUqTNouVvoQUj4XGO3ThA7jJw14o_UN2NUxb1LJx5Zxeuo2VBofloAtFxNMHm1rn2cDm_dCe07OE7AZ2ZYG5Ba64")`,
+                  backgroundImage: `url("${user.avatar}")`,
                 }}
               ></div>
             </Link>
