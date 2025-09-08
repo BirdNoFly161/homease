@@ -16,7 +16,8 @@ function Root() {
                 let response = await API.get("/users/token");
                 dispatch(setAuthToken(response.token));
                 dispatch(setUser(response.user));
-                API.setAuthToken(response.token);
+                API.defaults.headers.common['Authorization'] = `Bearer ${response.token}`
+                //API.setAuthToken(response.token);
                 //console.log(response);
                 setLoading(false);
             } catch (error) {
