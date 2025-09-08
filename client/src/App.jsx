@@ -10,6 +10,7 @@ import UserDetails from "./scenes/UserDetails";
 import Root from "./scenes";
 
 import "./App.css";
+import CreateProfile from "./scenes/CreateProfile";
 
 function App() {
   const router = createBrowserRouter([
@@ -29,6 +30,10 @@ function App() {
         {
           path: "/signup",
           element: <Signup />,
+        },
+        {
+          path: "/create-profile",
+          element: <CreateProfile />,
         },
         {
           path: "/browse-professionals",
