@@ -21,6 +21,7 @@ const UserSchema = new Schema({
     }
   },
   role: String,
+  category: String,
   description: String,
   reviews: [ReviewSchema],
   experiences: [ExperienceSchema],

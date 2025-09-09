@@ -4,8 +4,8 @@ import ProfilePictureSection from "@/components/sections/CreateProfile/ProfilePi
 import SubmitSection from "@/components/sections/CreateProfile/SubmitSection";
 import React from "react";
 
+import API from "@/api";
 import { Formik, Form, Field } from "formik";
-import axios from "axios";
 
 function CreateProfile() {
   return (
@@ -37,6 +37,7 @@ function CreateProfile() {
                   formData.append("profilePic", values.ProfilePic);
                   formData.append("description", values.about);
                   formData.append("role", values.category);
+                  let response = await API.post("/users/create-profile", fd);
 
                   await axios.post("/api/create-profile", formData, {
                     headers: { "Content-Type": "multipart/form-data" },
