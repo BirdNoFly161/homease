@@ -89,7 +89,7 @@ router.post("/login", async function login_user(req, res) {
     console.log("user authenticated correctly");
     let token = jwt.sign({ _id: user._id }, secret);
     res.cookie("token", token, { sameSite: "none", secure: true });
-    res.status(200).json({ token, user, msg: "user created successfully" });
+    res.status(200).json({ token, user, msg: "user logged in successfully" });
   } catch (error) {
     console.log("couldnt login user, error: ", error);
     res.status(500);
@@ -126,6 +126,7 @@ router.get(
   "/token",
   passport.authenticate("user", { session: false }),
   async function (req, res) {
+    console.log(req.cookies)
     if (req.cookies.token) {
       res.status(200).json({ token: req.cookies.token, user: req.user });
     } else {

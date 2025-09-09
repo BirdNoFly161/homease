@@ -1,6 +1,13 @@
 import SidebarItem from "@/components/common/SidebarItem";
+import API from "@/api";
+import { useDispatch } from "react-redux";
+import { setAuthToken } from "@/redux/user/userSlice";
+import { setUser } from "@/redux/user/userSlice";
+import { useNavigate } from "react-router-dom";
 
 function SidebarSection() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div className="layout-content-container flex flex-col w-80">
       <div className="flex flex-col justify-between bg-[#111714] p-4 min-h-[700px]">
@@ -27,6 +34,29 @@ function SidebarSection() {
             <SidebarItem icon={<div>⏰</div>} label="Availability" />
             <SidebarItem icon={<div>⭐</div>} label="Reviews" />
             <SidebarItem icon={<div>👤</div>} label="Profile" />
+            <button
+              className="flex min-w-[84px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#38e07b] text-white text-sm font-bold leading-normal tracking-[0.015em]"
+              onClick={async () => {
+                try {
+                  let response = await API.post("/users/logout");
+
+                  if (response.status === 200) {
+                    dispatch(setAuthToken(null));
+                    dispatch(setUser(null));
+                    delete API.defaults.headers.common['Authorization']
+                    navigate("/")
+                  }
+                  //console.log(response2);
+                  console.log(response);
+                }
+                catch (error) {
+                  console.log(error)
+                }
+
+              }}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>

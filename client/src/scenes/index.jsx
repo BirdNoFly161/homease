@@ -14,10 +14,11 @@ function Root() {
         async function init() {
             try {
                 let response = await API.get("/users/token");
-                dispatch(setAuthToken(response.token));
-                dispatch(setUser(response.user));
-                API.setAuthToken(response.token);
-                //console.log(response);
+                dispatch(setAuthToken(response.data.token));
+                dispatch(setUser(response.data.user));
+                API.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
+                //API.setAuthToken(response.token);
+                console.log(response);
                 setLoading(false);
             } catch (error) {
                 if (error.response.status === 401) {

@@ -1,4 +1,3 @@
-import NavBar from "@/components/common/NavBar";
 import HeroSection from "@/components/sections/Landing/HeroSection";
 import FeaturedProfessionals from "@/components/sections/Landing/FeaturedProfessionals";
 import PopularSkills from "@/components/sections/Landing/PopularSkills";
