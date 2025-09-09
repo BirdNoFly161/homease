@@ -36,6 +36,19 @@ router.get("/professionals", async function get_professionals(req, res) {
   }
 });
 
+router.get("/professionals/:id", async function get_professionals(req, res) {
+  try {
+    let userID = req.params.id
+    console.log('user id : ', userID)
+    let user = await User.find({ _id: userID, role: "professional" });
+    res.status(200).json({ data: user, ok: true, msg: 'found user' });
+  } catch (err) {
+    console.log("error querying database");
+    console.log(err)
+    res.status(500);
+  }
+});
+
 
 // this route takes form data 
 // are we sure the front end is sending the correct type of bod yfor each request ? 
