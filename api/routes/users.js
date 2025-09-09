@@ -162,7 +162,7 @@ router.post(
 );
 
 router.post(
-  "/users/create-profile",
+  "/create-profile",
   passport.authenticate("user", { session: false }),
   upload.single("profilePic"),
   async function createProfile(req, res) {
@@ -177,7 +177,7 @@ router.post(
       const user = await User.findById(userId);
       if (!user) return res.status(404).json({ msg: "User not found" });
 
-      user.category = role;
+      user.category = category;
       user.description = about;
 
       if (req.file) {

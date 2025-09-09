@@ -1,3 +1,5 @@
+import { Field } from "formik";
+
 function CategorySection() {
   return (
     <div className="w-full">
@@ -7,7 +9,8 @@ function CategorySection() {
       >
         Service Category
       </label>
-      <select
+      <Field 
+        as="select"
         id="category"
         name="category"
         className="form-select block w-full rounded-md border border-[#29382f] shadow-sm focus:border-white focus:ring-green-500 sm:text-sm p-4 bg-[#111714] text-white"
@@ -18,7 +21,7 @@ function CategorySection() {
         <option>Graphic Design</option>
         <option>Writing &amp; Translation</option>
         <option>Marketing &amp; Sales</option>
-      </select>
+      </Field>
     </div>
   );
 }

@@ -3,11 +3,14 @@ import CategorySection from "@/components/sections/CreateProfile/CategorySection
 import ProfilePictureSection from "@/components/sections/CreateProfile/ProfilePictureSection";
 import SubmitSection from "@/components/sections/CreateProfile/SubmitSection";
 import React from "react";
-
+import toast from "react-hot-toast";
 import API from "@/api";
 import { Formik, Form, Field } from "formik";
+import { toFormData } from "axios";
+import { useNavigate } from "react-router-dom";
 
 function CreateProfile() {
+  const navigate = useNavigate();
   return (
     <div
       className="relative flex size-full min-h-screen flex-col bg-[#111714] group/design-root overflow-x-hidden"
@@ -32,29 +35,21 @@ function CreateProfile() {
               }}
               onSubmit={async (values, { setSubmitting }) => {
                 try {
-                  console.log("Test");
-                  const formData = new FormData();
-                  formData.append("profilePic", values.ProfilePic);
-                  formData.append("description", values.about);
-                  formData.append("role", values.category);
+                  const fd = toFormData(values);
                   let response = await API.post("/users/create-profile", fd);
-
-                  await axios.post("/api/create-profile", formData, {
-                    headers: { "Content-Type": "multipart/form-data" },
-                  });
-
-                  console.log("Profile saved!");
+                  toast.success("Succesfully created account!");
                 } catch (err) {
                   console.error(err);
-                  alert("Error saving profile");
+                  toast.error("Error: Failed To Submit!")
                 } finally {
                   setSubmitting(false);
+                  navigate("/");
                 }
               }}
             >
               {({ setFieldValue, isSubmitting }) => (
                 <form className="space-y-8 w-full">
-                  <ProfilePictureSection />
+                  <ProfilePictureSection setFieldValue={setFieldValue}/>
                   <AboutSection />
                   <CategorySection />
                   <SubmitSection />
