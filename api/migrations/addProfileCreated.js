@@ -12,10 +12,14 @@ async function migrate() {
     console.log('Connected to DB');
 
     const result = await User.updateMany(
-      { profileCreated: { $exists: false } },
-      { $set: { profileCreated: false } } 
+      { profileCreated: { $exists: false } }, // filter
+      {
+        $set: {
+          profileCreated: false,
+          category: "basic"  // new field
+        }
+      }
     );
-
     console.log(`Updated ${result.modifiedCount} users`);
 
     await mongoose.disconnect();
