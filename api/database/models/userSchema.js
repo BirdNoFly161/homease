@@ -29,7 +29,11 @@ const UserSchema = new Schema({
   gender: {
     type: String,
     default: 'male'
-  }
+  },
+  profileCreated: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const User = mongoose.model("User", UserSchema);
