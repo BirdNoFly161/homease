@@ -21,6 +21,7 @@ const UserSchema = new Schema({
     }
   },
   role: String,
+  category: String,
   description: String,
   reviews: [ReviewSchema],
   experiences: [ExperienceSchema],
@@ -29,7 +30,11 @@ const UserSchema = new Schema({
   gender: {
     type: String,
     default: 'male'
-  }
+  },
+  profileCreated: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const User = mongoose.model("User", UserSchema);

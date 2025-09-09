@@ -161,6 +161,45 @@ router.post(
   },
 );
 
+router.post(
+  "/create-profile",
+  passport.authenticate("user", { session: false }),
+  upload.single("profilePic"),
+  async function createProfile(req, res) {
+    try {
+      const userId = req.user._id;
+      const { category, about } = req.body;
+
+      if (!category || !about) {
+        return res.status(400).json({ msg: "Role and description required" });
+      }
+
+      const user = await User.findById(userId);
+      if (!user) return res.status(404).json({ msg: "User not found" });
+
+      user.category = category;
+      user.description = about;
+
+      if (req.file) {
+        const { url } = await put(
+          "user/image",
+          fs.readFileSync(path.join("temp/", req.file.filename)),
+          { access: "public", token: BLOB_READ_WRITE_TOKEN }
+        );
+        user.avatar = url;
+      }
+
+      user.profileCreated = true;
+
+      await user.save();
+      res.status(200).json({ msg: "Profile updated successfully", user });
+    } catch (error) {
+      console.error("Error updating profile:", error);
+      res.status(500).json({ msg: "Server error" });
+    }
+  }
+);
+
 router.put(
   "/:id",
   passport.authenticate("user", { session: false }),
