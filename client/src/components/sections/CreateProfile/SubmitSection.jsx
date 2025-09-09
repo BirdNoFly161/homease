@@ -1,11 +1,17 @@
+import { useFormikContext } from "formik";
+
 function SubmitSection() {
+  const { submitForm, isSubmitting } = useFormikContext();
+
   return (
     <div className="pt-6 w-full">
       <button
         type="submit"
+        disabled={isSubmitting}
+        onClick={submitForm}
         className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-base font-bold text-black bg-[#38e07b] hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-"
       >
-        Create Profile
+        {isSubmitting ? "Saving..." : "Create Profile"}
       </button>
     </div>
   );

@@ -4,6 +4,9 @@ import ProfilePictureSection from "@/components/sections/CreateProfile/ProfilePi
 import SubmitSection from "@/components/sections/CreateProfile/SubmitSection";
 import React from "react";
 
+import { Formik, Form, Field } from "formik";
+import axios from "axios";
+
 function CreateProfile() {
   return (
     <div
@@ -21,12 +24,42 @@ function CreateProfile() {
                 Showcase your skills and attract clients.
               </p>
             </div>
-            <form className="space-y-8 w-full">
-              <ProfilePictureSection />
-              <AboutSection />
-              <CategorySection />
-              <SubmitSection />
-            </form>
+            <Formik
+              initialValues={{
+                profilePic: null,
+                about: "",
+                category: "",
+              }}
+              onSubmit={async (values, { setSubmitting }) => {
+                try {
+                  console.log("Test");
+                  const formData = new FormData();
+                  formData.append("profilePic", values.ProfilePic);
+                  formData.append("description", values.about);
+                  formData.append("role", values.category);
+
+                  await axios.post("/api/create-profile", formData, {
+                    headers: { "Content-Type": "multipart/form-data" },
+                  });
+
+                  console.log("Profile saved!");
+                } catch (err) {
+                  console.error(err);
+                  alert("Error saving profile");
+                } finally {
+                  setSubmitting(false);
+                }
+              }}
+            >
+              {({ setFieldValue, isSubmitting }) => (
+                <form className="space-y-8 w-full">
+                  <ProfilePictureSection />
+                  <AboutSection />
+                  <CategorySection />
+                  <SubmitSection />
+                </form>
+              )}
+            </Formik>
           </div>
         </div>
       </div>

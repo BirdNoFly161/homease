@@ -18,7 +18,7 @@ function ProfilePictureSection() {
           className="relative cursor-pointer bg-[#111714] rounded-md font-medium text-[#38e07b] hover:text-[#38e07b] focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-green-500 border border-[#29382f] px-4 py-2 text-sm"
         >
           <span>Upload a photo</span>
-          <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+          <input id="file-upload" name="profilePic" type="file" className="sr-only" />
         </label>
       </div>
     </div>
