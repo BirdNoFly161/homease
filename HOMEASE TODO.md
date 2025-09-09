@@ -15,3 +15,4 @@
 	2- dashboard svg's were changed to emoji icons by chatgpt... change them back to svgs
  	3- lots of sections still have div in it. consider changing them to sections.
   	4- the home page looks a bit off the left side isnt quiet aligned. Fix.
+	5- Make a better way to organize the description on the profile
