@@ -8,6 +8,10 @@ import API from "@/api";
 import { Formik, Form, Field } from "formik";
 import { toFormData } from "axios";
 import { useNavigate } from "react-router-dom";
+import WorkSection from "@/components/sections/CreateProfile/WorkSection";
+import EducationSection from "@/components/sections/CreateProfile/EducationSection";
+
+
 
 function CreateProfile() {
   const navigate = useNavigate();
@@ -32,6 +36,23 @@ function CreateProfile() {
                 profilePic: null,
                 about: "",
                 category: "",
+                education: [
+                  {
+                    school: "",
+                    degree: "",
+                    startDate: "",
+                    endDate: "",
+                  },
+                ],
+                workExperience: [
+                  {
+                    jobTitle: "",
+                    company: "",
+                    startDate: "",
+                    endDate: "",
+                    description: "",
+                  },
+                ],
               }}
               onSubmit={async (values, { setSubmitting }) => {
                 try {
@@ -49,9 +70,11 @@ function CreateProfile() {
             >
               {({ setFieldValue, isSubmitting }) => (
                 <form className="space-y-8 w-full">
-                  <ProfilePictureSection setFieldValue={setFieldValue}/>
+                  <ProfilePictureSection setFieldValue={setFieldValue} />
                   <AboutSection />
                   <CategorySection />
+                  <EducationSection />
+                  <WorkSection />
                   <SubmitSection />
                 </form>
               )}
