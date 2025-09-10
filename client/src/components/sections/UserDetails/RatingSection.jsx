@@ -1,14 +1,38 @@
 import { useState } from "react";
-
+import API from "@/api";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const RatingSection = ({ user }) => {
+    const navigate = useNavigate()
+
     const [rating, setRating] = useState(0);
     const [review, setReview] = useState("");
+    const onSubmit = async () => {
+        try {
+
+            let new_user = JSON.parse(JSON.stringify(user))
+            new_user.reviews.push({ rating: rating, comment: review })
+            console.log("sending rating with :", new_user)
+            let response = await API.put(`/users/${user._id}`, new_user);
+            console.log(response)
+            if (response.status === 200) {
+                toast.success("Rated !")
+                window.location.reload(); // doing this to reload the user object so if another rating is done it donesnt "forget the rating you sjust did " i dont like this i should refetch the user after the put and reinit it.
+                console.log("navigating to :", `/u/${user._id}`)
+            }
+
+        }
+        catch (error) {
+            console.log(error)
+            window.location.reload();
+        }
+    }
     return (
         <section>
-            <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Rate Professional</h2>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-                <label class="flex flex-col min-w-40 flex-1">
-                    <p class="text-white text-base font-medium leading-normal pb-2">Rating</p>
+            <h2 className="text-white text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Rate Professional</h2>
+            <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                <label className="flex flex-col min-w-40 flex-1">
+                    <p className="text-white text-base font-medium leading-normal pb-2">Rating</p>
                     <div className="flex gap-2">
                         {[1, 2, 3, 4, 5].map((star) => (
                             <button
@@ -32,22 +56,23 @@ const RatingSection = ({ user }) => {
                     </div>
                 </label>
             </div>
-            <div class="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
-                <label class="flex flex-col min-w-40 flex-1">
-                    <p class="text-white text-base font-medium leading-normal pb-2">Review</p>
+            <div className="flex max-w-[480px] flex-wrap items-end gap-4 px-4 py-3">
+                <label className="flex flex-col min-w-40 flex-1">
+                    <p className="text-white text-base font-medium leading-normal pb-2">Review</p>
                     <textarea
                         placeholder="Write your review here"
-                        class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border border-[#3d5245] bg-[#1c2620] focus:border-[#3d5245] min-h-36 placeholder:text-[#9eb7a8] p-[15px] text-base font-normal leading-normal"
+                        className="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-xl text-white focus:outline-0 focus:ring-0 border border-[#3d5245] bg-[#1c2620] focus:border-[#3d5245] min-h-36 placeholder:text-[#9eb7a8] p-[15px] text-base font-normal leading-normal"
                         value={review}
                         onChange={e => setReview(e.target.value)}
                     ></textarea>
                 </label>
             </div>
-            <div class="flex px-4 py-3 justify-end">
+            <div className="flex px-4 py-3 justify-end">
                 <button
-                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#38e07b] text-[#111714] text-sm font-bold leading-normal tracking-[0.015em]"
+                    className="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#38e07b] text-[#111714] text-sm font-bold leading-normal tracking-[0.015em]"
+                    onClick={onSubmit}
                 >
-                    <span class="truncate">Submit Review</span>
+                    <span className="truncate">Submit Review</span>
                 </button>
             </div>
 

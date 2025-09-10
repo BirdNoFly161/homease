@@ -41,7 +41,7 @@ router.get("/professionals/:id", async function get_professionals(req, res) {
     let userID = req.params.id
     console.log('user id : ', userID)
     let user = await User.findOne({ _id: userID, role: "professional" });
-    res.status(200).json({user, ok: true, msg: 'found user' });
+    res.status(200).json({ user, ok: true, msg: 'found user' });
   } catch (err) {
     console.log("error querying database");
     console.log(err)
@@ -220,8 +220,8 @@ router.put(
     try {
       let user = await User.findOne({ _id: req.params.id });
       console.log("got user update body: ", req.body);
-      if (req.body.folders) {
-        user.folders = req.body.folders;
+      if (req.body.reviews) {
+        user.reviews = req.body.reviews;
       }
       await user.save();
       res.status(200).json({ user: user, msg: "user updated successfully" });
