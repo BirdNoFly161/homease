@@ -7,6 +7,7 @@ const ExperienceSchema = new Schema({
     company: String,
     startDate: Date,
     endDate: Date,
+    description: String,
 });
 
 const Experience = mongoose.model("Experience", ExperienceSchema);

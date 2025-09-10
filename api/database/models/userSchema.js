@@ -27,6 +27,7 @@ const UserSchema = new Schema({
   experiences: [ExperienceSchema],
   rate: Number,
   rateType: String,
+  skills:[String],
   gender: {
     type: String,
     default: 'male'
