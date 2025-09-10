@@ -1,4 +1,7 @@
-function ProfilePictureSection({setFieldValue}) {
+import { useFormikContext } from "formik";
+
+function ProfilePictureSection() {
+  const { errors, touched, setFieldValue} = useFormikContext();
   return (
     <div>
       <label
@@ -26,6 +29,10 @@ function ProfilePictureSection({setFieldValue}) {
             onChange={(event) =>
               setFieldValue("profilePic", event.currentTarget.files[0])
             } />
+          {/* Show error */}
+          {errors.profilePic && touched.profilePic && (
+            <div className="text-red-500 text-sm mt-1">{errors.profilePic}</div>
+          )}
         </label>
       </div>
     </div>

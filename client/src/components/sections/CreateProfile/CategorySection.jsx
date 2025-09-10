@@ -1,6 +1,7 @@
-import { Field } from "formik";
+import { Field, useFormikContext } from "formik";
 
 function CategorySection() {
+  const { errors, touched} = useFormikContext();
   return (
     <div className="w-full">
       <label
@@ -22,6 +23,12 @@ function CategorySection() {
         <option>Writing &amp; Translation</option>
         <option>Marketing &amp; Sales</option>
       </Field>
+      {errors.category &&
+          touched.category && (
+            <div className="text-red-500 text-sm mt-1">
+              {errors.category}
+            </div>
+          )}
     </div>
   );
 }

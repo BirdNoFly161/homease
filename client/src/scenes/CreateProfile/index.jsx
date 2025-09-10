@@ -5,13 +5,12 @@ import SubmitSection from "@/components/sections/CreateProfile/SubmitSection";
 import React from "react";
 import toast from "react-hot-toast";
 import API from "@/api";
-import { Formik, Form, Field } from "formik";
+import { Formik } from "formik";
 import { toFormData } from "axios";
 import { useNavigate } from "react-router-dom";
 import WorkSection from "@/components/sections/CreateProfile/WorkSection";
 import EducationSection from "@/components/sections/CreateProfile/EducationSection";
-
-
+import { createProfileValidationSchema } from "./validation";
 
 function CreateProfile() {
   const navigate = useNavigate();
@@ -32,6 +31,7 @@ function CreateProfile() {
               </p>
             </div>
             <Formik
+            validationSchema={createProfileValidationSchema}
               initialValues={{
                 profilePic: null,
                 about: "",

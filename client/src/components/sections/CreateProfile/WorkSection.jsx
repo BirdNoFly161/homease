@@ -2,7 +2,7 @@ import React from "react";
 import { Field, FieldArray, useFormikContext } from "formik";
 
 export default function WorkSection() {
-  const { values } = useFormikContext(); // access Formik values
+  const { values, errors, touched } = useFormikContext(); // access values, errors, touched
 
   return (
     <div className="w-full">
@@ -34,6 +34,7 @@ export default function WorkSection() {
                       )}
                     </div>
 
+                    {/* Job Title */}
                     <div>
                       <label
                         className="block text-sm font-medium text-white mb-2"
@@ -49,8 +50,15 @@ export default function WorkSection() {
                         placeholder="e.g. Senior Software Engineer"
                         type="text"
                       />
+                      {errors.workExperience?.[index]?.jobTitle &&
+                        touched.workExperience?.[index]?.jobTitle && (
+                          <div className="text-red-500 text-sm mt-1">
+                            {errors.workExperience[index].jobTitle}
+                          </div>
+                        )}
                     </div>
 
+                    {/* Company */}
                     <div className="mt-4">
                       <label
                         className="block text-sm font-medium text-white mb-2"
@@ -66,8 +74,15 @@ export default function WorkSection() {
                         placeholder="e.g. Google"
                         type="text"
                       />
+                      {errors.workExperience?.[index]?.company &&
+                        touched.workExperience?.[index]?.company && (
+                          <div className="text-red-500 text-sm mt-1">
+                            {errors.workExperience[index].company}
+                          </div>
+                        )}
                     </div>
 
+                    {/* Dates */}
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 mt-4">
                       <div>
                         <label
@@ -83,6 +98,12 @@ export default function WorkSection() {
                           name={`workExperience.${index}.startDate`}
                           type="month"
                         />
+                        {errors.workExperience?.[index]?.startDate &&
+                          touched.workExperience?.[index]?.startDate && (
+                            <div className="text-red-500 text-sm mt-1">
+                              {errors.workExperience[index].startDate}
+                            </div>
+                          )}
                       </div>
 
                       <div>
@@ -99,9 +120,16 @@ export default function WorkSection() {
                           name={`workExperience.${index}.endDate`}
                           type="month"
                         />
+                        {errors.workExperience?.[index]?.endDate &&
+                          touched.workExperience?.[index]?.endDate && (
+                            <div className="text-red-500 text-sm mt-1">
+                              {errors.workExperience[index].endDate}
+                            </div>
+                          )}
                       </div>
                     </div>
 
+                    {/* Description (Optional) */}
                     <div className="mt-4">
                       <label
                         className="block text-sm font-medium text-white mb-2"

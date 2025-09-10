@@ -2,7 +2,7 @@ import { Field, FieldArray, useFormikContext } from "formik";
 import React from "react";
 
 export default function EducationSection() {
-  const { values } = useFormikContext(); // <-- get form values from context
+  const { values, errors, touched } = useFormikContext(); // get form values, errors, and touched state
 
   return (
     <div className="w-full">
@@ -49,6 +49,12 @@ export default function EducationSection() {
                         placeholder="e.g. University of California, Berkeley"
                         type="text"
                       />
+                      {errors.education?.[index]?.school &&
+                        touched.education?.[index]?.school && (
+                          <div className="text-red-500 text-sm mt-1">
+                            {errors.education[index].school}
+                          </div>
+                        )}
                     </div>
 
                     <div className="mt-4">
@@ -83,6 +89,12 @@ export default function EducationSection() {
                           name={`education.${index}.startDate`}
                           type="month"
                         />
+                        {errors.education?.[index]?.startDate &&
+                          touched.education?.[index]?.startDate && (
+                            <div className="text-red-500 text-sm mt-1">
+                              {errors.education[index].startDate}
+                            </div>
+                          )}
                       </div>
 
                       <div>
@@ -99,6 +111,12 @@ export default function EducationSection() {
                           name={`education.${index}.endDate`}
                           type="month"
                         />
+                        {errors.education?.[index]?.endDate &&
+                          touched.education?.[index]?.endDate && (
+                            <div className="text-red-500 text-sm mt-1">
+                              {errors.education[index].endDate}
+                            </div>
+                          )}
                       </div>
                     </div>
                   </div>
