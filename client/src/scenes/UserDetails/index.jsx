@@ -4,6 +4,7 @@ import TabsSection from "@/components/sections/UserDetails/TabsSection";
 import SkillsSection from "@/components/sections/UserDetails/SkillsSection";
 import ExperienceSection from "@/components/sections/UserDetails/ExperienceSection";
 import AboutMeSection from "@/components/sections/UserDetails/AboutMeSection";
+import RatingSection from "@/components/sections/UserDetails/RatingSection";
 import NavBar from "@/components/common/NavBar";
 import API from "@/api";
 import { useState, useEffect } from "react";
@@ -43,6 +44,7 @@ function UserDetails() {
             <SkillsSection user={user} />
             <ExperienceSection user={user} />
             <AboutMeSection user={user} />
+            <RatingSection user={user}/>
           </div>
         </div>
       </main>
