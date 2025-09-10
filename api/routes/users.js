@@ -40,8 +40,8 @@ router.get("/professionals/:id", async function get_professionals(req, res) {
   try {
     let userID = req.params.id
     console.log('user id : ', userID)
-    let user = await User.find({ _id: userID, role: "professional" });
-    res.status(200).json({ data: user, ok: true, msg: 'found user' });
+    let user = await User.findOne({ _id: userID, role: "professional" });
+    res.status(200).json({user, ok: true, msg: 'found user' });
   } catch (err) {
     console.log("error querying database");
     console.log(err)

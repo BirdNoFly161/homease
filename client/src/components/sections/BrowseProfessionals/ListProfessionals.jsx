@@ -1,6 +1,7 @@
 import PageSelector from "@/components/common/PageSelector";
 import { useState, useEffect } from "react";
 import API from "@/api";
+import { Link } from "react-router-dom";
 
 /*
 const professionals = [
@@ -109,22 +110,25 @@ const ListProfessionals = () => {
 
       {/* Professionals List */}
       {professionals.map((pro, i) => (
-        <div key={i} className="flex gap-4 bg-[#111714] px-4 py-3 justify-between">
-          <div className="flex items-start gap-4">
-            <div
-              className="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-[70px] w-fit"
-              style={{ backgroundImage: `url("${pro.avatar}")` }}
-            ></div>
-            <div className="flex flex-1 flex-col justify-center">
-              <p className="text-white text-base font-medium leading-normal">{pro.firstName} {pro.lastName}</p>
-              <p className="text-[#9eb7a8] text-sm font-normal leading-normal">{pro.reviews[0] ? pro.reviews[0].rating: "Not reviewed yet"}</p>
-              <p className="text-[#9eb7a8] text-sm font-normal leading-normal">{pro.description}</p>
+        <Link to={`/u/${pro._id}`}>
+          <div key={i} className="flex gap-4 bg-[#111714] px-4 py-3 justify-between">
+            <div className="flex items-start gap-4">
+              <div
+                className="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-[70px] w-fit"
+                style={{ backgroundImage: `url("${pro.avatar}")` }}
+              ></div>
+              <div className="flex flex-1 flex-col justify-center">
+                <p className="text-white text-base font-medium leading-normal">{pro.firstName} {pro.lastName}</p>
+                <p className="text-[#9eb7a8] text-sm font-normal leading-normal">{pro.reviews[0] ? pro.reviews[0].rating : "Not reviewed yet"}</p>
+                <p className="text-[#9eb7a8] text-sm font-normal leading-normal">{pro.description}</p>
+              </div>
+            </div>
+            <div className="shrink-0">
+              <p className="text-white text-base font-normal leading-normal">{pro.rate}</p>
             </div>
           </div>
-          <div className="shrink-0">
-            <p className="text-white text-base font-normal leading-normal">{pro.rate}</p>
-          </div>
-        </div>
+        </Link>
+
       ))}
 
       <PageSelector totalPages={10} initialPage={3} />
