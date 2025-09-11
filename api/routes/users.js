@@ -10,6 +10,8 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { put } from "@vercel/blob";
 import { MULTER_UPLOAD } from "../configs/environment.js";
+import { validateProfile } from "../middleware/validateProfile.js";
+import { uploadAvatar } from "../middleware/multer.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const upload = multer({ dest: MULTER_UPLOAD });
@@ -177,15 +179,14 @@ router.post(
 router.post(
   "/create-profile",
   passport.authenticate("user", { session: false }),
-  upload.single("profilePic"),
-  async function createProfile(req, res) {
+  uploadAvatar,       // Multer middleware for secure file upload
+  validateProfile,    // Yup middleware for body validation
+  async (req, res) => {
     try {
       const userId = req.user._id;
       const { category, about } = req.body;
 
-      if (!category || !about) {
-        return res.status(400).json({ msg: "Role and description required" });
-      }
+      if (!req.file) return res.status(400).json({ error: "No file uploaded" });
 
       const user = await User.findById(userId);
       if (!user) return res.status(404).json({ msg: "User not found" });
@@ -193,18 +194,21 @@ router.post(
       user.category = category;
       user.description = about;
 
-      if (req.file) {
-        const { url } = await put(
-          "user/image",
-          fs.readFileSync(path.join("temp/", req.file.filename)),
-          { access: "public", token: BLOB_READ_WRITE_TOKEN }
-        );
-        user.avatar = url;
-      }
+      const filePath = path.join("temp/", req.file.filename);
+
+      const { url } = await put("user/image", fs.readFileSync(filePath), {
+        access: "public",
+        token: process.env.BLOB_READ_WRITE_TOKEN,
+      });
+
+      user.avatar = url;
+
+      // Remove temp file after upload
+      fs.unlinkSync(filePath);
 
       user.profileCreated = true;
-
       await user.save();
+
       res.status(200).json({ msg: "Profile updated successfully", user });
     } catch (error) {
       console.error("Error updating profile:", error);
