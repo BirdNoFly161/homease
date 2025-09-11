@@ -11,17 +11,17 @@ async function migrate() {
 
     console.log('Connected to DB');
 
-    // Update users that don't have the education field
-    const result = await User.updateMany(
-      { education: { $exists: false } }, // filter users missing the field
-      {
-        $set: {
-          education: [], // new field as empty array
-        }
-      }
+    const resultProfile = await User.updateMany(
+      { profileCreated: { $exists: false } },
+      { $set: { profileCreated: false } }
     );
+    console.log(`Updated profileCreated for ${resultProfile.modifiedCount} users`);
 
-    console.log(`Updated ${result.modifiedCount} users`);
+    const resultEducation = await User.updateMany(
+      { education: { $exists: false } },
+      { $set: { education: [] } }
+    );
+    console.log(`Updated education field for ${resultEducation.modifiedCount} users`);
 
     await mongoose.disconnect();
     console.log('Migration finished');
