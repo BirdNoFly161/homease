@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 
 import { ExperienceSchema } from "./experienceSchema.js";
 import { ReviewSchema } from "./reviewSchema.js";
+import { EducationSchema } from "./educationSchema.js";
 
 const { Schema } = mongoose;
 
@@ -24,6 +25,7 @@ const UserSchema = new Schema({
   category: String,
   description: String,
   reviews: [ReviewSchema],
+  education: [EducationSchema],
   experiences: [ExperienceSchema],
   rate: Number,
   rateType: String,

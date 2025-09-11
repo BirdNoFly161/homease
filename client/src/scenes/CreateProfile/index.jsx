@@ -5,9 +5,12 @@ import SubmitSection from "@/components/sections/CreateProfile/SubmitSection";
 import React from "react";
 import toast from "react-hot-toast";
 import API from "@/api";
-import { Formik, Form, Field } from "formik";
+import { Formik } from "formik";
 import { toFormData } from "axios";
 import { useNavigate } from "react-router-dom";
+import WorkSection from "@/components/sections/CreateProfile/WorkSection";
+import EducationSection from "@/components/sections/CreateProfile/EducationSection";
+import { createProfileValidationSchema } from "./validation";
 
 function CreateProfile() {
   const navigate = useNavigate();
@@ -28,30 +31,50 @@ function CreateProfile() {
               </p>
             </div>
             <Formik
+            validationSchema={createProfileValidationSchema}
               initialValues={{
                 profilePic: null,
                 about: "",
                 category: "",
+                education: [
+                  {
+                    school: "",
+                    degree: "",
+                    startDate: "",
+                    endDate: "",
+                  },
+                ],
+                workExperience: [
+                  {
+                    jobTitle: "",
+                    company: "",
+                    startDate: "",
+                    endDate: "",
+                    description: "",
+                  },
+                ],
               }}
               onSubmit={async (values, { setSubmitting }) => {
                 try {
                   const fd = toFormData(values);
                   let response = await API.post("/users/create-profile", fd);
                   toast.success("Succesfully created account!");
+                  navigate("/");
                 } catch (err) {
                   console.error(err);
                   toast.error("Error: Failed To Submit!")
                 } finally {
                   setSubmitting(false);
-                  navigate("/");
                 }
               }}
             >
               {({ setFieldValue, isSubmitting }) => (
                 <form className="space-y-8 w-full">
-                  <ProfilePictureSection setFieldValue={setFieldValue}/>
+                  <ProfilePictureSection setFieldValue={setFieldValue} />
                   <AboutSection />
                   <CategorySection />
+                  <EducationSection />
+                  <WorkSection />
                   <SubmitSection />
                 </form>
               )}
