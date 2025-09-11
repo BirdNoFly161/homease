@@ -59,12 +59,12 @@ function CreateProfile() {
                   const fd = toFormData(values);
                   let response = await API.post("/users/create-profile", fd);
                   toast.success("Succesfully created account!");
+                  navigate("/");
                 } catch (err) {
                   console.error(err);
                   toast.error("Error: Failed To Submit!")
                 } finally {
                   setSubmitting(false);
-                  navigate("/");
                 }
               }}
             >

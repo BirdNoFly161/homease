@@ -19,4 +19,4 @@ export const uploadAvatar = multer({
       cb(new Error("Only JPEG and PNG images are allowed"));
     }
   },
-}).single("avatar");
+}).single("profilePic");

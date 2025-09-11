@@ -196,7 +196,7 @@ router.post(
       
       const { url } = await put("user/image", fs.readFileSync(filePath), {
         access: "public",
-        token: process.env.BLOB_READ_WRITE_TOKEN,
+        token: BLOB_READ_WRITE_TOKEN,
       });
 
       // Remove temp file after upload
