@@ -1,8 +1,9 @@
 import multer from "multer";
 import sanitize from "sanitize-filename";
+import { MULTER_UPLOAD } from "../configs/environment.js";
 
 const storage = multer.diskStorage({
-  destination: "temp/",
+  destination: MULTER_UPLOAD,
   filename: (req, file, cb) => {
     cb(null, Date.now() + "-" + sanitize(file.originalname));
   },

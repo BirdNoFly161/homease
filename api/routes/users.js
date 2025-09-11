@@ -184,29 +184,42 @@ router.post(
   async (req, res) => {
     try {
       const userId = req.user._id;
-      const { category, about } = req.body;
+      const { category, about, education = [], workExperience = [] } = req.body;
 
       if (!req.file) return res.status(400).json({ error: "No file uploaded" });
 
       const user = await User.findById(userId);
       if (!user) return res.status(404).json({ msg: "User not found" });
 
-      user.category = category;
-      user.description = about;
-
+      
       const filePath = path.join("temp/", req.file.filename);
-
+      
       const { url } = await put("user/image", fs.readFileSync(filePath), {
         access: "public",
         token: process.env.BLOB_READ_WRITE_TOKEN,
       });
 
-      user.avatar = url;
-
       // Remove temp file after upload
       fs.unlinkSync(filePath);
-
+      
+      user.category = category;
+      user.description = about;
+      user.avatar = url;
       user.profileCreated = true;
+      user.experiences = workExperience.map(exp => ({
+        role: exp.jobTitle,
+        company: exp.company,
+        startDate: new Date(exp.startDate),
+        endDate: new Date(exp.endDate),
+        description: exp.description,
+      }));
+      user.education = education.map((edu) => ({
+        school: edu.school,
+        degree: edu.degree,
+        startDate: new Date(edu.startDate),
+        endDate: new Date(edu.endDate),
+      }));
+
       await user.save();
 
       res.status(200).json({ msg: "Profile updated successfully", user });
