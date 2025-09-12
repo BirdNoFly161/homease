@@ -1,6 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
-import User from "../database/models/userSchema.js";
+
+import {User} from "../database/models/userSchema.js";
 import { secret, BLOB_READ_WRITE_TOKEN } from "../configs/environment.js";
 import passport from "passport";
 import multer from "multer";
