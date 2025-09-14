@@ -1,48 +1,42 @@
+import { useEffect, useState } from "react";
 import BookingsRow from "../../common/BookingsRow";
+import API from "@/api";
 
-export default function BookingsTableSection() {
-  const bookings = [
-  {
-    date: "2025-09-14",
-    email: "sophia.carter@example.com",
-    category: "Graphics Design",
-    catColor: "bg-green-900 text-green-300",
-    description:
-      "Design a modern, minimalist logo for a new tech startup focused on renewable energy solutions. The logo should be versatile enough for both digital and print media. Please include a full color palette and typography guidelines.",
-    status: "assigned", // options: "assigned", "not assigned", "complete"
-    actions: {
-      editable: true,
-      deletable: true,
-    },
-  },
-  {
-    date: "2025-09-13",
-    email: "ethan.bennett@example.com",
-    category: "Programming",
-    catColor: "bg-blue-900 text-blue-300",
-    description:
-      "Develop a cross-platform mobile application for a fitness tracker. The app should include features like step counting, heart rate monitoring, sleep tracking, and a social sharing component. The backend should be built with Node.js and the database with MongoDB.",
-    status: "complete",
-    actions: {
-      editable: true,
-      deletable: true,
-    },
-  },
-  {
-    date: "2025-09-12",
-    email: "olivia.hayes@example.com",
-    category: "Video Editing",
-    catColor: "bg-purple-900 text-purple-300",
-    description:
-      "Edit a high-energy promotional video for a new product launch. The video should be around 2 minutes long and feature dynamic cuts, engaging music, and professional color grading. Raw footage will be provided.",
-    status: "not assigned",
-    actions: {
-      editable: true,
-      deletable: true,
-    },
-  },
-];
+function formatDate(isoString) {
+  const date = new Date(isoString);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0"); // months are 0-indexed
+  const year = String(date.getFullYear()).slice(-2); // get last two digits
 
+  return `${day}/${month}/${year}`;
+}
+
+export default function BookingsTableSection({ clientId }) {
+  const [bookings, setBookings] = useState([]);
+
+  useEffect(() => {
+    async function fetchBookings() {
+      try {
+        console.log("Fetching booking data.")
+        const res = await API.get(`/bookings/client`);
+        const data = res.data.bookings;
+
+        console.log("Bookings: ", data)
+
+        // determine status based on assigned_professional
+        const formattedBookings = data.map(b => ({
+          ...b,
+          status: b.assigned_professional ? "assigned" : "not assigned",
+        }));
+
+        setBookings(formattedBookings);
+      } catch (err) {
+        console.error("Error fetching bookings", err);
+      }
+    }
+
+    fetchBookings();
+  }, [clientId]);
 
   return (
     <div className="overflow-hidden rounded-lg border border-[#29382f] bg-[#111714] shadow-sm">
@@ -61,13 +55,24 @@ export default function BookingsTableSection() {
             <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
               Status
             </th>
-            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
-            </th>
+            <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-white"></th>
           </tr>
         </thead>
         <tbody className="divide-y divide-[#29382f]">
           {bookings.map((b, i) => (
-            <BookingsRow key={i} {...b} />
+            <BookingsRow
+              key={b._id}
+              id={b._id}
+              date={formatDate(b.date)}
+              email={b.client?.email}
+              category={b.category}
+              description={b.description}
+              status={b.status}
+              actions={{ editable: true, deletable: true }}
+              onDelete={(id) => {
+                setBookings((prev) => prev.filter((b) => b._id !== id));
+              }}
+            />
           ))}
         </tbody>
       </table>
