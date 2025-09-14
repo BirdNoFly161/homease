@@ -11,6 +11,7 @@ import Root from "./scenes";
 
 import "./App.css";
 import CreateProfile from "./scenes/CreateProfile";
+import Requests from "./scenes/Requests";
 
 function App() {
   const router = createBrowserRouter([
@@ -38,6 +39,10 @@ function App() {
         {
           path: "/browse-professionals",
           element: <BrowseProfessionals />
+        },,
+        {
+          path: "/requests",
+          element: <Requests />
         },
         {
           path: "/profile",
