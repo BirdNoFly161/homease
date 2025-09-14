@@ -152,23 +152,21 @@ const Requests = () => {
                           </button>
                         </td>
                         <td className="h-[72px] px-4 py-2 w-60 text-[#9eb7a8] text-sm font-bold leading-normal tracking-[0.015em]">
-                          {req.assigned_professional != null ? (
-                            <span>{req.assigned_professional.firstName } {req.assigned_professional.lastName }</span>
-                          ) : (
+                          {
                             <select
                               className="bg-[#1c2620] text-white rounded-lg px-2 py-1"
                               defaultValue=""
                               onChange={async e => {
                                 // handle assignment here, e.g. call API to assign professional
                                 // Example: assignProfessional(req._id, e.target.value)
-                                let response = await API.put(`bookings/${req._id}`, {...req, assigned_professional: e.target.value, client: req.client._id})
+                                let response = await API.put(`bookings/${req._id}`, { ...req, assigned_professional: e.target.value, client: req.client._id })
                                 console.log(response)
                                 navigate("/requests")
                               }}
                             >
                               {professionals.map((professional) => (<option value={professional._id}>{professional.firstName} {professional.lastName}</option>))}F
                             </select>
-                          )}
+                          }
                         </td>
                       </tr>
                     ))}

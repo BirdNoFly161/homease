@@ -28,8 +28,9 @@ const UserSchema = new Schema({
   education: [EducationSchema],
   experiences: [ExperienceSchema],
   rate: Number,
+  available: Boolean,
   rateType: String,
-  skills:[String],
+  skills: [String],
   gender: {
     type: String,
     default: 'male'
@@ -41,4 +42,4 @@ const UserSchema = new Schema({
 });
 
 const User = mongoose.model("User", UserSchema);
-export {User, UserSchema};
+export { User, UserSchema };
