@@ -8,6 +8,7 @@ import Login from "./scenes/Login";
 import Signup from "./scenes/Signup";
 import UserDetails from "./scenes/UserDetails";
 import Root from "./scenes";
+import Requests from "./scenes/Requests"
 
 import "./App.css";
 import CreateProfile from "./scenes/CreateProfile";
@@ -38,6 +39,10 @@ function App() {
         {
           path: "/browse-professionals",
           element: <BrowseProfessionals />
+        },
+        {
+          path: "/requests",
+          element: <Requests/>
         },
         {
           path: "/profile",

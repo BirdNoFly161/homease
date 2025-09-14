@@ -91,14 +91,30 @@ router.post(
 
 router.put(
   "/:id",
-  passport.authenticate("booking", { session: false }),
   async function (req, res) {
     try {
       let booking = await Booking.findOne({ _id: req.params.id });
+      console.log("foumd booking", booking)
       console.log("got booking update body: ", req.body);
-
+      if(req.body){
+        booking.assigned_professional = req.body.assigned_professional
+      }
       await booking.save();
       res.status(200).json({ booking: booking, msg: "booking updated successfully" });
+    } catch (error) {
+      console.log("error: ", error);
+      res.status(500).json({ msg: "error trying to update user" });
+    }
+  },
+);
+
+router.delete(
+  "/",
+  async function (req, res) {
+    try {
+      let booking = await Booking.deleteMany({});
+
+      res.status(200).json({ booking: booking, msg: "booking deleted successfully" });
     } catch (error) {
       console.log("error: ", error);
       res.status(500).json({ msg: "error trying to update user" });
