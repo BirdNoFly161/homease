@@ -28,8 +28,8 @@ function NavBar() {
           <Link className="text-white text-sm font-medium leading-normal" to="/browse-professionals">
             Browse
           </Link>
-          <Link className="text-white text-sm font-medium leading-normal" to="/for-pros">
-            For Pros
+          <Link className="text-white text-sm font-medium leading-normal" to="/requests">
+            Requests
           </Link>
         </div>
       </div>
