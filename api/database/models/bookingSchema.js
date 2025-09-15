@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
-import { UserSchema } from "./userSchema.js";
 const { Schema } = mongoose;
 
-
 const BookingSchema = new Schema({
+
     client: { type: Schema.Types.ObjectId, ref: 'User' },
     category: String,
     description: String,
     status: String,
-    assigned_professional: { type: Schema.Types.ObjectId, ref: 'User' }
+    assigned_professional: { type: Schema.Types.ObjectId, ref: 'User' },
+    date: { type: Date, default: Date.now } // auto-captures submission date
 });
 
 const Booking = mongoose.model("Booking", BookingSchema);

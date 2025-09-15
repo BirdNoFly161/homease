@@ -64,30 +64,117 @@ router.get("/bookings/client/:id", async function get_bookings_by_professional(r
   }
 });
 
+router.get("/client",
+  passport.authenticate("user", { session: false }),
+  async function get_bookings_by_client(req, res) {
+  try {
+    let clientID = req.user._id
+    console.log('Client id : ', clientID)
+    let bookings = await Booking.find({ client: clientID });
+    res.status(200).json({ bookings, ok: true, msg: 'found booking for client: ', clientID });
+  } catch (err) {
+    console.log("error querying database");
+    console.log(err)
+    res.status(500);
+  }
+});
 
-// this route takes form data 
-// are we sure the front end is sending the correct type of bod yfor each request ? 
-router.post(
-  "/register",
-  async function register_booking(req, res) {
+router.delete("/booking/:id",
+  passport.authenticate("user", { session: false }),
+  async function delete_booking(req, res) {
     try {
-      if (Object.keys(req.body).length != 0) {
-        const new_booking = new Booking(req.body);
-        console.log("booking body : ", req.body);
+      const bookingID = req.params.id;
+      const userID = req.user._id; // authenticated user's ID
+      console.log('Booking id to delete:', bookingID);
+      console.log('Requesting user id:', userID);
 
-        await new_booking.save();
-        res.status(200).json({ msg: "booking created successfully" });
+      // Find the booking first
+      const booking = await Booking.findById(bookingID);
+      if (!booking) {
+        return res.status(404).json({ ok: false, msg: 'Booking not found' });
       }
-      else {
-        res.status(400).json({ msg: "bad request - empty body" })
+
+      // Check if the authenticated user is the owner
+      if (booking.client.toString() !== userID.toString()) {
+        return res.status(403).json({ ok: false, msg: 'Not authorized to delete this booking' });
       }
-    } catch (error) {
-      console.log("couldnt register user, error: ", error);
-      res.status(500);
+
+      // Delete the booking
+      await Booking.findByIdAndDelete(bookingID);
+
+      res.status(200).json({ ok: true, msg: 'Booking deleted', bookingID });
+    } catch (err) {
+      console.log("Error deleting booking:");
+      console.log(err);
+      res.status(500).json({ ok: false, msg: 'Server error' });
     }
-  },
+  }
 );
 
+
+// this route takes form data 
+// are we sure the front end is sending the correct type of bod yfor each request ?
+//You can use YUP on the backend to verify it is you know
+router.post(
+  "/register",
+  passport.authenticate("user", { session: false }),
+  async function register_booking(req, res) {
+    try {
+      if (Object.keys(req.body).length === 0) {
+        return res.status(400).json({ msg: "bad request - empty body" });
+      }
+
+      const new_booking = new Booking({
+        ...req.body,
+        client: req.user._id,
+        date: new Date()
+      });
+
+      await new_booking.save();
+
+      res.status(200).json({
+        msg: "booking created successfully",
+        booking: new_booking
+      });
+    } catch (error) {
+      console.error("couldn't register booking, error: ", error);
+      res.status(500).json({ msg: "server error" });
+    }
+  }
+);
+
+router.put(
+  "/update/:id",
+  passport.authenticate("user", { session: false }),
+  async function update_booking(req, res) {
+    try {
+      if (Object.keys(req.body).length === 0) {
+        return res.status(400).json({ msg: "bad request - empty body" });
+      }
+
+      const updated_booking = await Booking.findOneAndUpdate(
+        { _id: req.params.id, client: req.user._id }, // only allow owner to update
+        { 
+          ...req.body,
+          date: new Date() // refresh date on update
+        },
+        { new: true, runValidators: true }
+      );
+
+      if (!updated_booking) {
+        return res.status(404).json({ msg: "booking not found or unauthorized" });
+      }
+
+      res.status(200).json({
+        msg: "booking updated successfully",
+        booking: updated_booking
+      });
+    } catch (error) {
+      console.error("couldn't update booking, error: ", error);
+      res.status(500).json({ msg: "server error" });
+    }
+  }
+);
 
 router.put(
   "/:id",
