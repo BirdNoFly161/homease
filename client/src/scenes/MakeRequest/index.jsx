@@ -17,7 +17,7 @@ export default function MakeRequest() {
   const handleSubmit = async (values, { resetForm }) => {
     try {
       if (booking?._id) {
-        await API.put(`/bookings/${booking._id}`, values);
+        await API.put(`/bookings/update/${booking._id}`, values);
         toast.success("Booking updated");
       } else {
         await API.post("/bookings/register", values);

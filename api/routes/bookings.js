@@ -143,6 +143,38 @@ router.post(
   }
 );
 
+router.put(
+  "/update/:id",
+  passport.authenticate("user", { session: false }),
+  async function update_booking(req, res) {
+    try {
+      if (Object.keys(req.body).length === 0) {
+        return res.status(400).json({ msg: "bad request - empty body" });
+      }
+
+      const updated_booking = await Booking.findOneAndUpdate(
+        { _id: req.params.id, client: req.user._id }, // only allow owner to update
+        { 
+          ...req.body,
+          date: new Date() // refresh date on update
+        },
+        { new: true, runValidators: true }
+      );
+
+      if (!updated_booking) {
+        return res.status(404).json({ msg: "booking not found or unauthorized" });
+      }
+
+      res.status(200).json({
+        msg: "booking updated successfully",
+        booking: updated_booking
+      });
+    } catch (error) {
+      console.error("couldn't update booking, error: ", error);
+      res.status(500).json({ msg: "server error" });
+    }
+  }
+);
 
 router.put(
   "/:id",
