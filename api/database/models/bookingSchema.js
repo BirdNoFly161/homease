@@ -6,7 +6,7 @@ const BookingSchema = new Schema({
     client: { type: Schema.Types.ObjectId, ref: 'User' },
     category: String,
     description: String,
-    status: String,
+    status: { type: String, default: "Open" },
     assigned_professional: { type: Schema.Types.ObjectId, ref: 'User' },
     date: { type: Date, default: Date.now } // auto-captures submission date
 });

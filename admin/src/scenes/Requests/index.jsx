@@ -40,7 +40,7 @@ const requests = [
   },
 ];
 
-
+import { BiCheck } from "react-icons/bi";
 
 const Requests = () => {
 
@@ -151,11 +151,11 @@ const Requests = () => {
                             <span className="truncate">{req.status}</span>
                           </button>
                         </td>
-                        <td className="h-[72px] px-4 py-2 w-60 text-[#9eb7a8] text-sm font-bold leading-normal tracking-[0.015em]">
+                        <td className="flex flex-0 flex-col h-[72px] px-4 py-2 w-60 text-[#9eb7a8] text-sm font-bold leading-normal tracking-[0.015em]">
                           {
                             <select
                               className="bg-[#1c2620] text-white rounded-lg px-2 py-1"
-                              defaultValue=""
+                              defaultValue={req.assigned_professional ? req.assigned_professional._id : null}
                               onChange={async e => {
                                 // handle assignment here, e.g. call API to assign professional
                                 // Example: assignProfessional(req._id, e.target.value)
