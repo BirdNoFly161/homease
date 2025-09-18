@@ -14,13 +14,8 @@ function NavBar() {
     <header className="fixed w-full z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#29382f] px-10 py-3 bg-[#111714]">
       <div className="flex items-center gap-8">
         <Link className="flex items-center gap-4 text-white" to="/">
-          <div className="size-4">
-            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"
-                fill="currentColor"
-              />
-            </svg>
+          <div className="size-16 rounded">
+          <img className="rounded-full" src="../../../public/homease_logo.jpg"/>
           </div>
           <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Homease</h2>
         </Link>
