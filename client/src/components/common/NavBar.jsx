@@ -35,7 +35,7 @@ function NavBar() {
       </div>
 
       <div className="flex flex-1 justify-end gap-8">
-        <SearchBar placeholder="Search" small />
+        {/*<SearchBar placeholder="Search" small />*/}
         <div className="flex gap-2 items-center">
           <Button variant="primary">Post a request</Button>
 

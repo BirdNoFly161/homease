@@ -1,5 +1,6 @@
 import SearchBar from "../../common/SearchBar";
 import Button from "../../common/Button";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -17,7 +18,12 @@ const HeroSection = () => {
         </h2>
       </div>
       <div className="w-full max-w-[480px]">
-        <SearchBar placeholder="Search for skills or categories" />
+        {/*<SearchBar placeholder="Search for skills or categories" />*/}
+        <Link to="browse-professionals">
+          <Button variant="primary">
+            Browse our professionals !
+          </Button>
+        </Link>
       </div>
     </section>
   );
