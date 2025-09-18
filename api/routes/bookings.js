@@ -20,7 +20,7 @@ var router = express.Router();
 
 router.get("/", async function get_bookings(req, res) {
   try {
-    let bookings = await Booking.find({}).populate("client").populate("assigned_professional");
+    let bookings = await Booking.find({}).populate("assigned_professional");
     res.status(200).json({ bookings });
   } catch (err) {
     console.log("error querying database");
@@ -117,7 +117,6 @@ router.delete("/booking/:id",
 //You can use YUP on the backend to verify it is you know
 router.post(
   "/register",
-  passport.authenticate("user", { session: false }),
   async function register_booking(req, res) {
     try {
       if (Object.keys(req.body).length === 0) {
@@ -126,7 +125,6 @@ router.post(
 
       const new_booking = new Booking({
         ...req.body,
-        client: req.user._id,
         date: new Date()
       });
 

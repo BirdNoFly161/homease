@@ -3,7 +3,9 @@ const { Schema } = mongoose;
 
 const BookingSchema = new Schema({
 
-    client: { type: Schema.Types.ObjectId, ref: 'User' },
+    firstName: String,
+    lastName: String,
+    telephone: String,
     category: String,
     description: String,
     status: { type: String, default: "Open" },

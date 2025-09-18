@@ -119,7 +119,7 @@ const Requests = () => {
           </div>
         </header>
         <div className="px-40 flex flex-1 justify-center py-5">
-          <div className="layout-content-container flex flex-col max-w-[960px] flex-1">
+          <div className="layout-content-container flex flex-col max-w-[1080px] flex-1">
             <div className="flex flex-wrap justify-between gap-3 p-4">
               <div className="flex min-w-72 flex-col gap-3">
                 <p className="text-white tracking-light text-[32px] font-bold leading-tight">Client Job Requests</p>
@@ -133,6 +133,8 @@ const Requests = () => {
                     <tr className="bg-[#1c2620]">
                       <th className="px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">Request ID</th>
                       <th className="px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">Client</th>
+                      <th className="px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">Telephone</th>
+                      <th className="px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">Category</th>
                       <th className="px-4 py-3 text-left text-white w-[400px] text-sm font-medium leading-normal">Job Description</th>
                       <th className="px-4 py-3 text-left text-white w-60 text-sm font-medium leading-normal">Status</th>
                       <th className="px-4 py-3 text-left text-[#9eb7a8] w-60 text-sm font-medium leading-normal">Assign Professional</th>
@@ -140,9 +142,11 @@ const Requests = () => {
                   </thead>
                   <tbody>
                     {requests.map((req) => (
-                      <tr key={req.id} className="border-t border-t-[#3d5245]">
+                      <tr key={req._id} className="border-t border-t-[#3d5245]">
                         <td className="h-[72px] px-4 py-2 w-[400px] text-white text-sm font-normal leading-normal">{req._id}</td>
-                        <td className="h-[72px] px-4 py-2 w-[400px] text-[#9eb7a8] text-sm font-normal leading-normal">{req.client.firstName} {req.client.lastName}</td>
+                        <td className="h-[72px] px-4 py-2 w-[400px] text-[#9eb7a8] text-sm font-normal leading-normal">{req.firstName} {req.lastName}</td>
+                        <td className="h-[72px] px-4 py-2 w-[400px] text-[#9eb7a8] text-sm font-normal leading-normal">{req.telephone}</td>
+                        <td className="h-[72px] px-4 py-2 w-[400px] text-[#9eb7a8] text-sm font-normal leading-normal">{req.category}</td>
                         <td className="h-[72px] px-4 py-2 w-[400px] text-[#9eb7a8] text-sm font-normal leading-normal">{req.description}</td>
                         <td className="h-[72px] px-4 py-2 w-60 text-sm font-normal leading-normal">
                           <button
@@ -159,12 +163,12 @@ const Requests = () => {
                               onChange={async e => {
                                 // handle assignment here, e.g. call API to assign professional
                                 // Example: assignProfessional(req._id, e.target.value)
-                                let response = await API.put(`bookings/${req._id}`, { ...req, assigned_professional: e.target.value, client: req.client._id })
+                                let response = await API.put(`bookings/${req._id}`, { ...req, assigned_professional: e.target.value })
                                 console.log(response)
                                 navigate("/requests")
                               }}
                             >
-                              {professionals.map((professional) => (<option value={professional._id}>{professional.firstName} {professional.lastName}</option>))}F
+                              {professionals.map((professional) => (<option key={professional._id} value={professional._id}>{professional.firstName} {professional.lastName}</option>))}F
                             </select>
                           }
                         </td>
