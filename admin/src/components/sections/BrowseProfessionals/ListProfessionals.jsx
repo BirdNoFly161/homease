@@ -83,7 +83,7 @@ const ListProfessionals = () => {
 
       {/* Filters */}
       <div className="flex gap-3 p-3 flex-wrap pr-4">
-        {["Skill Category", "Rating", "Price Range", "Verification"].map(
+        {/*["Skill Category", "Rating", "Price Range", "Verification"]*/[].map(
           (filter) => (
             <button
               key={filter}
@@ -131,7 +131,7 @@ const ListProfessionals = () => {
 
       ))}
 
-      <PageSelector totalPages={10} initialPage={3} />
+      {/*<PageSelector totalPages={10} initialPage={3} />*/}
     </section>
   );
 };
