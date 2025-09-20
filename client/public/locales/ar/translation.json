@@ -16,5 +16,21 @@
             "p_1": "Offer your skills and connect with clients seeking your expertise.",
             "b_1": "Browse our professionals !"
         }
+    },
+    "navbar": {
+        "brand": {
+            "title": "Homease"
+        },
+        "links": {
+            "browse": "Browse",
+            "requests": "Requests"
+        },
+        "actions": {
+            "postRequest": "Post a request",
+            "login": "Log in"
+        }
+    },
+    "browse": {
+        "title": "Find skilled professionals"
     }
 }

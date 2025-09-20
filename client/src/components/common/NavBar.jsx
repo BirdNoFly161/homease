@@ -4,9 +4,11 @@ import SearchBar from "./SearchBar";
 import Button from "./Button";
 import { useDispatch, useSelector} from "react-redux";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { t, i18 } = useTranslation()
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
 
@@ -18,14 +20,14 @@ function NavBar() {
           <div className="size-16 rounded">
           <img className="rounded-full" src="../../../public/homease_logo.jpg"/>
           </div>
-          <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Homease</h2>
+          <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">{t("navbar.brand.title")}</h2>
         </Link>
         <div className="flex items-center gap-9">
           <Link className="text-white text-sm font-medium leading-normal" to="/browse-professionals">
-            Browse
+            {t("navbar.links.browse")}
           </Link>
           <Link className="text-white text-sm font-medium leading-normal" to="/requests">
-            Requests
+            {t("navbar.links.requests")}
           </Link>
         </div>
       </div>
@@ -34,7 +36,7 @@ function NavBar() {
         {/*<SearchBar placeholder="Search" small />*/}
         <LanguageSwitcher/>
         <div className="flex gap-2 items-center">
-          <Button variant="primary">Post a request</Button>
+          <Button variant="primary">{t("navbar.actions.postRequest")}</Button>
 
           {user ? (
             <Link to="/profile/dashboard">
@@ -48,7 +50,7 @@ function NavBar() {
           ) : (
             <Link to="/login">
               <Button variant="secondary" onClick={() => setIsLoggedIn(true)}>
-                Log in
+                {t("navbar.actions.login")}
               </Button>
             </Link>
           )}

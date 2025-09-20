@@ -2,6 +2,7 @@ import PageSelector from "@/components/common/PageSelector";
 import { useState, useEffect } from "react";
 import API from "@/api";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 /*
 const professionals = [
@@ -57,6 +58,7 @@ const ListProfessionals = () => {
 
   const [professionals, setProfessionals] = useState([]);
   const [search, setSearch] = useState('');
+  const { t, i18 } = useTranslation()
 
   async function fetchProfessionals() {
     try {
@@ -77,7 +79,7 @@ const ListProfessionals = () => {
     <section className="layout-content-container flex flex-col max-w-[960px] flex-1">
       <div className="flex flex-wrap justify-between gap-3 p-4">
         <p className="text-white tracking-light text-[32px] font-bold leading-tight min-w-72">
-          Find skilled professionals
+          {t("browse.title")}
         </p>
       </div>
 
