@@ -3,6 +3,7 @@ import { useState } from "react";
 import SearchBar from "./SearchBar";
 import Button from "./Button";
 import { useDispatch, useSelector} from "react-redux";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -31,6 +32,7 @@ function NavBar() {
 
       <div className="flex flex-1 justify-end gap-8">
         {/*<SearchBar placeholder="Search" small />*/}
+        <LanguageSwitcher/>
         <div className="flex gap-2 items-center">
           <Button variant="primary">Post a request</Button>
 
