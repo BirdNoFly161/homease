@@ -1,0 +1,12 @@
+{
+    "landing": {
+        "heroSection": {
+            "title_1": "Find the perfect professional for your project",
+            "title_2": "Browse thousands of skilled professionals ready to help you with any task, from web development to graphic design.",
+            "cta": "Browse our professionals !"
+        },
+        "featuredProfessionals": {},
+        "popularSkills": {},
+        "joinSection": {}
+    }
+}

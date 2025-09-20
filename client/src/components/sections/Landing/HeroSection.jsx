@@ -1,8 +1,10 @@
 import SearchBar from "../../common/SearchBar";
 import Button from "../../common/Button";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const HeroSection = () => {
+  const { t, i18 } = useTranslation()
   return (
     <section
       className="flex min-h-[480px] flex-col gap-6 bg-cover bg-center bg-no-repeat items-center justify-center p-4 rounded-xl"
@@ -12,7 +14,7 @@ const HeroSection = () => {
       }}
     >
       <div className="flex flex-col gap-2 text-center">
-        <h1 className="text-white text-5xl font-black leading-tight">Find the perfect professional for your project</h1>
+        <h1 className="text-white text-5xl font-black leading-tight">{t('landing.heroSection.title_1')}</h1>
         <h2 className="text-white text-base font-normal">
           Browse thousands of skilled professionals ready to help you with any task, from web development to graphic design.
         </h2>
