@@ -32,5 +32,23 @@
     },
     "browse": {
         "title": "Find skilled professionals"
+    },
+    "bookings": {
+        "title": "Requests",
+        "add": "Requests",
+        "tableHeaders": {
+            "date": "Date",
+            "category": "Category",
+            "description": "Description",
+            "status": "Status"
+        },
+        "status": {
+            "assigned": "Assigned",
+            "notAssigned": "Not assigned"
+        },
+        "actions": {
+            "delete": "Delete",
+            "edit": "Edit"
+        }
     }
 }

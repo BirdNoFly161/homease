@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BookingsRow from "../../common/BookingsRow";
 import API from "@/api";
+import { useTranslation } from "react-i18next";
 
 function formatDate(isoString) {
   const date = new Date(isoString);
@@ -13,6 +14,7 @@ function formatDate(isoString) {
 
 export default function BookingsTableSection({ clientId }) {
   const [bookings, setBookings] = useState([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function fetchBookings() {
@@ -26,7 +28,7 @@ export default function BookingsTableSection({ clientId }) {
         // determine status based on assigned_professional
         const formattedBookings = data.map(b => ({
           ...b,
-          status: b.assigned_professional ? "assigned" : "not assigned",
+          status: b.assigned_professional ? t("bookings.status.notAssigned") : t("bookings.status.assigned"),
         }));
 
         setBookings(formattedBookings);
@@ -44,16 +46,16 @@ export default function BookingsTableSection({ clientId }) {
         <thead className="bg-[#29382f]">
           <tr>
             <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
-              Date
+              {t("bookings.tableHeaders.date")}
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
-              Category
+              {t("bookings.tableHeaders.category")}
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
-              Description
+              {t("bookings.tableHeaders.description")}
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-white">
-              Status
+              {t("bookings.tableHeaders.status")}
             </th>
             <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-white"></th>
           </tr>

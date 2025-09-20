@@ -2,9 +2,11 @@ import React from "react";
 import toast from "react-hot-toast";
 import API from "@/api";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function BookingsRow({ id, date, email, category, description, status, onEdit, onDelete }) {
   const navigate = useNavigate();
+    const { t } = useTranslation();
 
   const handleEdit = () => {
     navigate("/make-request", {
@@ -63,10 +65,10 @@ export default function BookingsRow({ id, date, email, category, description, st
       <td className="whitespace-nowrap px-6 py-4">
         <div className="flex justify-center gap-2">
           <button onClick={handleEdit} className="bg-[#38e07b] hover:bg-[#2ecc71] text-black px-3 py-1 rounded-full text-sm">
-            Edit
+            {t("bookings.actions.edit")}
           </button>
           <button onClick={handleDelete} className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-full text-sm">
-            Delete
+            {t("bookings.actions.delete")}
           </button>
         </div>
       </td>
