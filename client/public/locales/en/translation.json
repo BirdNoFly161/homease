@@ -50,5 +50,47 @@
             "delete": "Delete",
             "edit": "Edit"
         }
+    },
+    "signupForm": {
+        "title": "Create your account",
+        "fields": {
+            "username": {
+                "label": "Username",
+                "placeholder": "username",
+                "required": "User name is required"
+            },
+            "firstName": {
+                "label": "First name",
+                "placeholder": "firstname",
+                "required": "First name is required"
+            },
+            "lastName": {
+                "label": "Last name",
+                "placeholder": "lastname",
+                "required": "Last name is required"
+            },
+            "telephone": {
+                "label": "Telephone",
+                "placeholder": "+213XXXXXXXXX",
+                "required": "Telephone is required",
+                "invalid": "Phone number is not valid"
+            },
+            "password": {
+                "label": "Password",
+                "placeholder": "password",
+                "required": "Password is required",
+                "uppercase": "Password must contain at least one uppercase letter",
+                "lowercase": "Password must contain at least one lowercase letter",
+                "number": "Password must contain at least one number",
+                "symbol": "Password must contain at least one symbol"
+            }
+        },
+        "radioSection": {
+            "customer": "I'm a customer",
+            "professional": "I'm a professional"
+        },
+        "submitButton": "Create Account",
+        "successMessage": "Successfully created account",
+        "errorMessage": "Error creating account"
     }
 }
