@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 const professionals = [
   { name: "Oussama Benmansour", role: "Software Engineer", img: "https://nsvzogblporeptlk.public.blob.vercel-storage.com/user/image-NTACyQgrtJEfnWH6fqrQ63hWpt2118" },
   { name: "Adel Benmansour", role: "Psychologist", img: "https://nsvzogblporeptlk.public.blob.vercel-storage.com/user/image-uwzsnDcO3Va6DAcFEq24CBVuJVkNHi" },
@@ -5,9 +7,11 @@ const professionals = [
 ];
 
 const FeaturedProfessionals = () => {
+  const { t, i18 } = useTranslation();
+
   return (
     <section className="px-4 pt-5">
-      <h2 className="text-white text-[22px] font-bold pb-3">Featured Professionals</h2>
+      <h2 className="text-white text-[22px] font-bold pb-3">{t("landing.featuredProfessionals.title_1")}</h2>
       <div className="flex overflow-y-auto gap-3">
         {professionals.map((pro, idx) => (
           <div key={idx} className="flex flex-col gap-4 min-w-60">

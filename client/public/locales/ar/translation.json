@@ -5,8 +5,16 @@
             "title_2": "تصفح آلاف المحترفين المهرة المستعدين لمساعدتك في أي مهمة، من تطوير الويب إلى التصميم الجرافيكي.",
             "cta": "تصفح محترفينا!"
         },
-        "featuredProfessionals": {},
-        "popularSkills": {},
-        "joinSection": {}
+        "featuredProfessionals": {
+            "title_1": "Featured Professionals"
+        },
+        "popularSkills": {
+            "title_1": "Popular Skills"
+        },
+        "joinSection": {
+            "title_1": "Join SkillHub as a Professional",
+            "p_1": "Offer your skills and connect with clients seeking your expertise.",
+            "b_1": "Browse our professionals !"
+        }
     }
 }

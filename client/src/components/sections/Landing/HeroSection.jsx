@@ -15,9 +15,7 @@ const HeroSection = () => {
     >
       <div className="flex flex-col gap-2 text-center">
         <h1 className="text-white text-5xl font-black leading-tight">{t('landing.heroSection.title_1')}</h1>
-        <h2 className="text-white text-base font-normal">
-          Browse thousands of skilled professionals ready to help you with any task, from web development to graphic design.
-        </h2>
+        <h2 className="text-white text-base font-normal">{t('landing.heroSection.title_2')}</h2>
       </div>
       <div className="w-full max-w-[480px]">
         {/*<SearchBar placeholder="Search for skills or categories" />*/}
