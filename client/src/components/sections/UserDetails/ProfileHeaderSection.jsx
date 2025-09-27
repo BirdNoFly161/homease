@@ -1,11 +1,13 @@
 import Avatar from "@/components/common/user-details/Avatar";
 import Spinner from "@/components/unused/spinner";
+import { useTranslation } from "react-i18next";
 
 const ProfileHeaderSection = ({
   user,
   bookLabel = "Book Now",
   onBook = () => { },
 }) => {
+  const {t} = useTranslation();
   console.log(user)
   return (
     <div className="flex p-4">
@@ -26,9 +28,9 @@ const ProfileHeaderSection = ({
           onClick={onBook}
           className="flex items-center justify-center rounded-full h-10 px-6 bg-[#29382f] text-white text-sm font-bold leading-normal tracking-[0.015em] 
              w-full sm:w-auto sm:shrink-0"
-          aria-label={bookLabel}
+          aria-label={t("userDetails.header.book")}
         >
-          <span className="truncate">{bookLabel}</span>
+          <span className="truncate">{t("userDetails.header.book")}</span>
         </button>
       </div>
     </div>
