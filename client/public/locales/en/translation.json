@@ -111,53 +111,107 @@
         "errorMessage": "Error creating account"
     },
     "loginForm": {
-    "title": "Log in to Homease",
-    "fields": {
-      "username": {
-        "label": "Username",
-        "placeholder": "username",
-        "required": "User name is required"
-      },
-      "password": {
-        "label": "Password",
-        "placeholder": "password",
-        "required": "Password is required",
-        "uppercase": "Password must contain at least one uppercase letter",
-        "lowercase": "Password must contain at least one lowercase letter",
-        "number": "Password must contain at least one number",
-        "symbol": "Password must contain at least one symbol"
-      }
+        "title": "Log in to Homease",
+        "fields": {
+            "username": {
+                "label": "Username",
+                "placeholder": "username",
+                "required": "User name is required"
+            },
+            "password": {
+                "label": "Password",
+                "placeholder": "password",
+                "required": "Password is required",
+                "uppercase": "Password must contain at least one uppercase letter",
+                "lowercase": "Password must contain at least one lowercase letter",
+                "number": "Password must contain at least one number",
+                "symbol": "Password must contain at least one symbol"
+            }
+        },
+        "submitButton": "Log in",
+        "forgotPassword": "Forgot password?",
+        "continueWith": {
+            "title": "Or continue with",
+            "google": "Continue with Google",
+            "linkedIn": "Continue with LinkedIn"
+        },
+        "successMessage": "Logged in",
+        "errorMessage": "Error logging in"
     },
-    "submitButton": "Log in",
-    "forgotPassword": "Forgot password?",
-    "continueWith": {
-        "title": "Or continue with",
-        "google": "Continue with Google",
-        "linkedIn": "Continue with LinkedIn"
+    "userDetails": {
+        "about": "About Me",
+        "experience": "Experience",
+        "rating": {
+            "title": "Rate Professional",
+            "rate": "Rating",
+            "review": "Review",
+            "submit": "Submit Review",
+            "placeholder": "Write your review here",
+            "successMessage": "Rated!"
+        },
+        "header": {
+            "book": "Book Now"
+        },
+        "skills": "Skills",
+        "tabs": {
+            "overview": "Overview",
+            "portfolio": "Portfolio",
+            "reviews": "Reviews",
+            "certifications": "Certifications"
+        }
     },
-    "successMessage": "Logged in",
-    "errorMessage": "Error logging in"
-  },
-  "userDetails":{
-    "about": "About Me",
-    "experience":  "Experience",
-    "rating": {
-        "title": "Rate Professional",
-        "rate": "Rating",
-        "review": "Review",
-        "submit": "Submit Review",
-        "placeholder": "Write your review here",
-        "successMessage": "Rated!"
-    },
-    "header": {
-        "book": "Book Now"
-    },
-    "skills": "Skills",
-    "tabs": {
-        "overview": "Overview",
-        "portfolio": "Portfolio",
-        "reviews": "Reviews",
-        "certifications": "Certifications"
+    "makeRequest": {
+        "title": {
+            "new": "New Request",
+            "edit": "Edit Request"
+        },
+        "subtitle": {
+            "new": "Fill out the form below to submit a new request.",
+            "edit": "Update your booking below."
+        },
+        "fields": {
+            "firstName": {
+                "label": "First Name",
+                "placeholder": "First name",
+                "required": "First name is required"
+            },
+            "lastName": {
+                "label": "Last Name",
+                "placeholder": "Last name",
+                "required": "Last name is required"
+            },
+            "telephone": {
+                "label": "Telephone",
+                "placeholder": "+213XXXXXXXXX",
+                "required": "Telephone is required"
+            },
+            "category": {
+                "label": "Category (Optional)",
+                "placeholder": "Select a category",
+                "required": "Please select a category",
+                "options": {
+                    "web-dev": "Web Development",
+                    "graphics-design": "Graphics Design",
+                    "content-writing": "Content Writing",
+                    "other": "Other"
+                }
+            },
+            "description": {
+                "label": "Description",
+                "placeholder": "Provide a detailed description...",
+                "minLength": "Description must be at least 10 characters"
+            }
+        },
+        "buttons": {
+            "cancel": "Cancel",
+            "submit": "Submit"
+        },
+        "messages": {
+            "success": {
+                "new": "Request Submitted",
+                "edit": "Booking updated"
+            },
+            "error": "Error submitting request"
+        }
     }
-  }
 }

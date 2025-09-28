@@ -159,5 +159,59 @@
             "reviews": "المراجعات",
             "certifications": "الشهادات"
         }
+    },
+    "makeRequest": {
+        "title": {
+            "new": "طلب جديد",
+            "edit": "تعديل الطلب"
+        },
+        "subtitle": {
+            "new": "املأ النموذج أدناه لإرسال طلب جديد.",
+            "edit": "قم بتحديث حجزك أدناه."
+        },
+        "fields": {
+            "firstName": {
+                "label": "الاسم الأول",
+                "placeholder": "الاسم الأول",
+                "required": "الاسم الأول مطلوب"
+            },
+            "lastName": {
+                "label": "اسم العائلة",
+                "placeholder": "اسم العائلة",
+                "required": "اسم العائلة مطلوب"
+            },
+            "telephone": {
+                "label": "رقم الهاتف",
+                "placeholder": "+213XXXXXXXXX",
+                "required": "رقم الهاتف مطلوب"
+            },
+            "category": {
+                "label": "الفئة (اختياري)",
+                "placeholder": "اختر فئة",
+                "required": "الرجاء اختيار فئة",
+                "options": {
+                    "web-dev": "تطوير الويب",
+                    "graphics-design": "تصميم الرسومات",
+                    "content-writing": "كتابة المحتوى",
+                    "other": "أخرى"
+                }
+            },
+            "description": {
+                "label": "الوصف",
+                "placeholder": "قدم وصفاً مفصلاً...",
+                "minLength": "يجب أن يحتوي الوصف على 10 أحرف على الأقل"
+            }
+        },
+        "buttons": {
+            "cancel": "إلغاء",
+            "submit": "إرسال"
+        },
+        "messages": {
+            "success": {
+                "new": "تم إرسال الطلب بنجاح",
+                "edit": "تم تحديث الحجز بنجاح"
+            },
+            "error": "حدث خطأ أثناء إرسال الطلب"
+        }
     }
 }

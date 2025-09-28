@@ -6,6 +6,7 @@ import API from "@/api";
 import { Toaster } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { setAuthToken, setUser } from "../redux/user/userSlice";
+import i18n from "@/i18n";
 
 function Root() {
     const [loading, setLoading] = useState(true);
@@ -24,7 +25,7 @@ function Root() {
                 setLoading(false);
 
                 /*Redirect if the profile has not been created!*/
-                if(!response.data.user.profileCreated && location.pathname !== "/create-profile"){
+                if (!response.data.user.profileCreated && location.pathname !== "/create-profile") {
                     navigate("/create-profile");
                 }
             } catch (error) {
@@ -38,11 +39,15 @@ function Root() {
         init();
     }, [navigate, location]);
 
+    useEffect(() => {
+        document.documentElement.setAttribute('dir', i18n.dir());
+    }, [i18n.dir()]);
+
     return (
         <>
             <NavBar />
-                {loading && <Spinner />}
-                {!loading && <Outlet />}
+            {loading && <Spinner />}
+            {!loading && <Outlet />}
             <Toaster />
         </>
     );
