@@ -111,29 +111,53 @@
         "errorMessage": "Error creating account"
     },
     "loginForm": {
-        "title": "Log in to SkillHub",
-        "fields": {
-            "username": {
-                "label": "Username",
-                "placeholder": "username",
-                "required": "User name is required"
-            },
-            "password": {
-                "label": "Password",
-                "placeholder": "password",
-                "required": "Password is required",
-                "uppercase": "Password must contain at least one uppercase letter",
-                "lowercase": "Password must contain at least one lowercase letter",
-                "number": "Password must contain at least one number",
-                "symbol": "Password must contain at least one symbol"
-            }
-        },
-        "radioSection": {
-            "customer": "I'm a customer",
-            "professional": "I'm a professional"
-        },
-        "submitButton": "Create Account",
-        "successMessage": "Successfully created account",
-        "errorMessage": "Error creating account"
+    "title": "Log in to SkillHub",
+    "fields": {
+      "username": {
+        "label": "Username",
+        "placeholder": "username",
+        "required": "User name is required"
+      },
+      "password": {
+        "label": "Password",
+        "placeholder": "password",
+        "required": "Password is required",
+        "uppercase": "Password must contain at least one uppercase letter",
+        "lowercase": "Password must contain at least one lowercase letter",
+        "number": "Password must contain at least one number",
+        "symbol": "Password must contain at least one symbol"
+      }
+    },
+    "submitButton": "Log in",
+    "forgotPassword": "Forgot password?",
+    "continueWith": {
+        "title": "Or continue with",
+        "google": "Continue with Google",
+        "linkedIn": "Continue with LinkedIn"
+    },
+    "successMessage": "Logged in",
+    "errorMessage": "Error logging in"
+  },
+  "userDetails":{
+    "about": "About Me",
+    "experience":  "Experience",
+    "rating": {
+        "title": "Rate Professional",
+        "rate": "Rating",
+        "review": "Review",
+        "submit": "Submit Review",
+        "placeholder": "Write your review here",
+        "successMessage": "Rated!"
+    },
+    "header": {
+        "book": "Book Now"
+    },
+    "skills": "Skills",
+    "tabs": {
+        "overview": "Overview",
+        "portfolio": "Portfolio",
+        "reviews": "Reviews",
+        "certifications": "Certifications"
     }
+  }
 }

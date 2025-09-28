@@ -9,15 +9,17 @@ import { useDispatch } from "react-redux";
 import { setAuthToken } from "@/redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { setUser } from "@/redux/user/userSlice";
+import { useTranslation } from "react-i18next";
 
 const LoginFormSection = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="layout-content-container flex flex-col w-[512px] max-w-[960px] py-5 flex-1 items-center">
       <h2 className="text-white tracking-light text-[28px] font-bold leading-tight px-4 text-center pb-3 pt-5">
-        Log in to SkillHub
+        {t("loginForm.title")}
       </h2>
 
       <Formik
@@ -27,21 +29,21 @@ const LoginFormSection = () => {
           password: "Passowrd123&&",
         }}
         validationSchema={Yup.object({
-          username: Yup.string().required("User name is required"),
+          username: Yup.string().required(t("loginForm.fields.username.required")),
           password: Yup.string()
-            .required("Password is required")
+            .required(t("loginForm.fields.password.required"))
             .matches(
               /(?=.*[A-Z])/,
-              "Password must contain atleast one uppercase letter",
+              t("loginForm.fields.password.uppercase"),
             )
             .matches(
               /(?=.*[a-z])/,
-              "Password must contain atleast one lowercase letter",
+              t("loginForm.fields.password.lowercase"),
             )
-            .matches(/(?=.*\d)/, "Password must contain atleast one number")
+            .matches(/(?=.*\d)/, t("loginForm.fields.password.number"))
             .matches(
               /(?=.*[-_~!@#$%^&+])/,
-              "Password must contain atleast one symbol",
+              t("loginForm.fields.password.symbol"),
             ),
           profile: Yup.mixed(),
         })}
@@ -60,14 +62,15 @@ const LoginFormSection = () => {
               dispatch(setAuthToken(response.data.token));
               console.log(response);
               navigate("/browse-professionals");
-              toast.success("Logged in");
+              toast.success(t("loginForm.successMessage"));
             
             }
 
 
           }
           catch (error) {
-            console.log(error)
+            console.log(error);
+            toast.error(t("loginForm.errorMessage"));
           }
         }}
       >
@@ -77,10 +80,28 @@ const LoginFormSection = () => {
             onSubmit={formik.handleSubmit}
           >
             <div className="flex w-full max-w-[480px] flex-wrap items-end gap-4 px-4 py-3 justify-center">
-              <InputField id="username" name="username" label="Username" type="text" placeholder="username" value={formik.values.username} onBlur={formik.handleBlur} onChange={formik.handleChange} />
+              <InputField 
+                id="username" 
+                name="username" 
+                label={t("loginForm.fields.username.label")}
+                type="text" 
+                placeholder={t("loginForm.fields.username.placeholder")}
+                value={formik.values.username} 
+                onBlur={formik.handleBlur} 
+                onChange={formik.handleChange} 
+              />
             </div>
             <div className="flex w-full max-w-[480px] flex-wrap items-end gap-4 px-4 py-3 justify-center">
-              <InputField id="password" name="password" label="Password" type="password" placeholder="password" value={formik.values.password} onBlur={formik.handleBlur} onChange={formik.handleChange} />
+              <InputField 
+                id="password" 
+                name="password" 
+                label={t("loginForm.fields.password.label")}
+                type="password" 
+                placeholder={t("loginForm.fields.password.placeholder")}
+                value={formik.values.password} 
+                onBlur={formik.handleBlur} 
+                onChange={formik.handleChange} 
+              />
             </div>
             <div>
               {formik.touched.username && formik.errors.username ? (
@@ -96,20 +117,20 @@ const LoginFormSection = () => {
             </div>
             <div className="flex w-full max-w-[480px] px-4 py-3 justify-center">
               <button type="submit" className="flex min-w-[84px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#38e07b] text-white text-sm font-bold leading-normal tracking-[0.015em]">
-                <span className="truncate text-[#111714]">{formik.isSubmitting ? <Spinner /> : <span>Log in</span>}</span>
+                <span className="truncate text-[#111714]">{formik.isSubmitting ? <Spinner /> : <span>{t("loginForm.loginButton")}</span>}</span>
               </button>
             </div>
 
 
             <p className="text-[#b89d9f] text-sm font-normal leading-normal pb-3 pt-1 px-4 underline text-center">
-              Forgot password?
+              {t("loginForm.forgotPassword")}
             </p>
 
           </form>
         )}
       </Formik>
       <p className="text-[#b89d9f] text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">
-        Or continue with
+        {t("loginForm.continueWith.title")}
       </p>
 
       <SocialLoginSection />
