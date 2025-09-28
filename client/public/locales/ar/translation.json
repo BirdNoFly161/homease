@@ -6,32 +6,32 @@
             "cta": "تصفح محترفينا!"
         },
         "featuredProfessionals": {
-            "title_1": "Featured Professionals",
+            "title_1": "المحترفون المميزون",
             "professionals": [
                 {
-                    "name": "Oussama Benmansour",
-                    "role": "Software Engineer",
+                    "name": "أسامة بن منصور",
+                    "role": "مهندس برمجيات",
                     "img": "https://nsvzogblporeptlk.public.blob.vercel-storage.com/user/image-NTACyQgrtJEfnWH6fqrQ63hWpt2118"
                 },
                 {
-                    "name": "Adel Benmansour",
-                    "role": "Psychologist",
+                    "name": "عادل بن منصور",
+                    "role": "طبيب نفسي",
                     "img": "https://nsvzogblporeptlk.public.blob.vercel-storage.com/user/image-uwzsnDcO3Va6DAcFEq24CBVuJVkNHi"
                 },
                 {
-                    "name": "Nabil Djari",
-                    "role": "Translation specialist/Psychologist",
+                    "name": "نبيل جاري",
+                    "role": "أخصائي ترجمة/طبيب نفسي",
                     "img": "https://lh3.googleusercontent.com/aida-public/AB6AXuCoydEavwCtjCyS7H8jfAibJ_4leGGWoqWdrzMPfNG8BsDEMdDhsHA-nCXfbv8wwb-oYP6C5M-caG5mUaL7KMOgaDvjUFYGuIz3-nRK8XI1zzp85MkzGaDzdzrk8Xzbp1GKmeQ-44kRRuB1xS33SbaD1smEAsMscBLLoNEzEU70k4lHxlPY65IRKA45k2R3FEZF3kM10HAYoZco2S8HeISTnQyB6KrxJbHTKnOyqDNgKpqTivMBvnI6zX-sWEPAUCJZIEfELX67PBm4"
                 }
             ]
         },
         "popularSkills": {
-            "title_1": "Popular Skills"
+            "title_1": "المهارات الشائعة"
         },
         "joinSection": {
-            "title_1": "Join SkillHub as a Professional",
-            "p_1": "Offer your skills and connect with clients seeking your expertise.",
-            "b_1": "Browse our professionals !"
+            "title_1": "انضم إلى Homease كمحترف",
+            "p_1": "قدم مهاراتك وتواصل مع العملاء الذين يبحثون عن خبرتك.",
+            "b_1": "تصفح محترفينا!"
         }
     },
     "navbar": {
@@ -39,125 +39,125 @@
             "title": "Homease"
         },
         "links": {
-            "browse": "Browse",
-            "requests": "Requests"
+            "browse": "تصفح",
+            "requests": "الطلبات"
         },
         "actions": {
-            "postRequest": "Post a request",
-            "login": "Log in"
+            "postRequest": "انشر طلباً",
+            "login": "تسجيل الدخول"
         }
     },
     "browse": {
-        "title": "Find skilled professionals"
+        "title": "اعثر على محترفين مهرة"
     },
     "bookings": {
-        "title": "Requests",
-        "add": "Requests",
+        "title": "الطلبات",
+        "add": "الطلبات",
         "tableHeaders": {
-            "date": "Date",
-            "category": "Category",
-            "description": "Description",
-            "status": "Status"
+            "date": "التاريخ",
+            "category": "الفئة",
+            "description": "الوصف",
+            "status": "الحالة"
         },
         "status": {
-            "assigned": "Assigned",
-            "notAssigned": "Not assigned"
+            "assigned": "مُعيَّن",
+            "notAssigned": "غير مُعيَّن"
         },
         "actions": {
-            "delete": "Delete",
-            "edit": "Edit"
+            "delete": "حذف",
+            "edit": "تحرير"
         }
     },
     "signupForm": {
-        "title": "Create your account",
+        "title": "أنشئ حسابك",
         "fields": {
             "username": {
-                "label": "Username",
-                "placeholder": "username",
-                "required": "User name is required"
+                "label": "اسم المستخدم",
+                "placeholder": "اسم المستخدم",
+                "required": "اسم المستخدم مطلوب"
             },
             "firstName": {
-                "label": "First name",
-                "placeholder": "firstname",
-                "required": "First name is required"
+                "label": "الاسم الأول",
+                "placeholder": "الاسم الأول",
+                "required": "الاسم الأول مطلوب"
             },
             "lastName": {
-                "label": "Last name",
-                "placeholder": "lastname",
-                "required": "Last name is required"
+                "label": "اسم العائلة",
+                "placeholder": "اسم العائلة",
+                "required": "اسم العائلة مطلوب"
             },
             "telephone": {
-                "label": "Telephone",
+                "label": "رقم الهاتف",
                 "placeholder": "+213XXXXXXXXX",
-                "required": "Telephone is required",
-                "invalid": "Phone number is not valid"
+                "required": "رقم الهاتف مطلوب",
+                "invalid": "رقم الهاتف غير صحيح"
             },
             "password": {
-                "label": "Password",
-                "placeholder": "password",
-                "required": "Password is required",
-                "uppercase": "Password must contain at least one uppercase letter",
-                "lowercase": "Password must contain at least one lowercase letter",
-                "number": "Password must contain at least one number",
-                "symbol": "Password must contain at least one symbol"
+                "label": "كلمة المرور",
+                "placeholder": "كلمة المرور",
+                "required": "كلمة المرور مطلوبة",
+                "uppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
+                "lowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل",
+                "number": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+                "symbol": "يجب أن تحتوي كلمة المرور على رمز واحد على الأقل"
             }
         },
         "radioSection": {
-            "customer": "I'm a customer",
-            "professional": "I'm a professional"
+            "customer": "أنا عميل",
+            "professional": "أنا محترف"
         },
-        "submitButton": "Create Account",
-        "successMessage": "Successfully created account",
-        "errorMessage": "Error creating account"
+        "submitButton": "إنشاء الحساب",
+        "successMessage": "تم إنشاء الحساب بنجاح",
+        "errorMessage": "خطأ في إنشاء الحساب"
     },
     "loginForm": {
-    "title": "Log in to SkillHub",
-    "fields": {
-      "username": {
-        "label": "Username",
-        "placeholder": "username",
-        "required": "User name is required"
-      },
-      "password": {
-        "label": "Password",
-        "placeholder": "password",
-        "required": "Password is required",
-        "uppercase": "Password must contain at least one uppercase letter",
-        "lowercase": "Password must contain at least one lowercase letter",
-        "number": "Password must contain at least one number",
-        "symbol": "Password must contain at least one symbol"
-      }
+        "title": "تسجيل الدخول إلى Homease",
+        "fields": {
+            "username": {
+                "label": "اسم المستخدم",
+                "placeholder": "اسم المستخدم",
+                "required": "اسم المستخدم مطلوب"
+            },
+            "password": {
+                "label": "كلمة المرور",
+                "placeholder": "كلمة المرور",
+                "required": "كلمة المرور مطلوبة",
+                "uppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
+                "lowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل",
+                "number": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+                "symbol": "يجب أن تحتوي كلمة المرور على رمز واحد على الأقل"
+            }
+        },
+        "submitButton": "تسجيل الدخول",
+        "forgotPassword": "نسيت كلمة المرور؟",
+        "continueWith": {
+            "title": "أو تابع مع",
+            "google": "تابع مع Google",
+            "linkedIn": "تابع مع LinkedIn"
+        },
+        "successMessage": "تم تسجيل الدخول",
+        "errorMessage": "خطأ في تسجيل الدخول"
     },
-    "submitButton": "Log in",
-    "forgotPassword": "Forgot password?",
-    "continueWith": {
-        "title": "Or continue with",
-        "google": "Continue with Google",
-        "linkedIn": "Continue with LinkedIn"
-    },
-    "successMessage": "Logged in",
-    "errorMessage": "Error logging in"
-  },
-  "userDetails":{
-    "about": "About Me",
-    "experience":  "Experience",
-    "rating": {
-        "title": "Rate Professional",
-        "rate": "Rating",
-        "review": "Review",
-        "submit": "Submit Review",
-        "placeholder": "Write your review here",
-        "successMessage": "Rated!"
-    },
-    "header": {
-        "book": "Book Now"
-    },
-    "skills": "Skills",
-    "tabs": {
-        "overview": "Overview",
-        "portfolio": "Portfolio",
-        "reviews": "Reviews",
-        "certifications": "Certifications"
+    "userDetails": {
+        "about": "نبذة عني",
+        "experience": "الخبرة",
+        "rating": {
+            "title": "قيم المحترف",
+            "rate": "التقييم",
+            "review": "المراجعة",
+            "submit": "إرسال المراجعة",
+            "placeholder": "اكتب مراجعتك هنا",
+            "successMessage": "تم التقييم!"
+        },
+        "header": {
+            "book": "احجز الآن"
+        },
+        "skills": "المهارات",
+        "tabs": {
+            "overview": "نظرة عامة",
+            "portfolio": "معرض الأعمال",
+            "reviews": "المراجعات",
+            "certifications": "الشهادات"
+        }
     }
-  }
 }

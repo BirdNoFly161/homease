@@ -29,7 +29,7 @@
             "title_1": "Popular Skills"
         },
         "joinSection": {
-            "title_1": "Join SkillHub as a Professional",
+            "title_1": "Join Homease as a Professional",
             "p_1": "Offer your skills and connect with clients seeking your expertise.",
             "b_1": "Browse our professionals !"
         }
@@ -111,7 +111,7 @@
         "errorMessage": "Error creating account"
     },
     "loginForm": {
-    "title": "Log in to SkillHub",
+    "title": "Log in to Homease",
     "fields": {
       "username": {
         "label": "Username",
