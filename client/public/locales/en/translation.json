@@ -6,7 +6,24 @@
             "cta": "Browse our professionals !"
         },
         "featuredProfessionals": {
-            "title_1": "Featured Professionals"
+            "title_1": "Featured Professionals",
+            "professionals": [
+                {
+                    "name": "Oussama Benmansour",
+                    "role": "Software Engineer",
+                    "img": "https://nsvzogblporeptlk.public.blob.vercel-storage.com/user/image-NTACyQgrtJEfnWH6fqrQ63hWpt2118"
+                },
+                {
+                    "name": "Adel Benmansour",
+                    "role": "Psychologist",
+                    "img": "https://nsvzogblporeptlk.public.blob.vercel-storage.com/user/image-uwzsnDcO3Va6DAcFEq24CBVuJVkNHi"
+                },
+                {
+                    "name": "Nabil Djari",
+                    "role": "Translation specialist/Psychologist",
+                    "img": "https://lh3.googleusercontent.com/aida-public/AB6AXuCoydEavwCtjCyS7H8jfAibJ_4leGGWoqWdrzMPfNG8BsDEMdDhsHA-nCXfbv8wwb-oYP6C5M-caG5mUaL7KMOgaDvjUFYGuIz3-nRK8XI1zzp85MkzGaDzdzrk8Xzbp1GKmeQ-44kRRuB1xS33SbaD1smEAsMscBLLoNEzEU70k4lHxlPY65IRKA45k2R3FEZF3kM10HAYoZco2S8HeISTnQyB6KrxJbHTKnOyqDNgKpqTivMBvnI6zX-sWEPAUCJZIEfELX67PBm4"
+                }
+            ]
         },
         "popularSkills": {
             "title_1": "Popular Skills"
@@ -74,6 +91,32 @@
                 "placeholder": "+213XXXXXXXXX",
                 "required": "Telephone is required",
                 "invalid": "Phone number is not valid"
+            },
+            "password": {
+                "label": "Password",
+                "placeholder": "password",
+                "required": "Password is required",
+                "uppercase": "Password must contain at least one uppercase letter",
+                "lowercase": "Password must contain at least one lowercase letter",
+                "number": "Password must contain at least one number",
+                "symbol": "Password must contain at least one symbol"
+            }
+        },
+        "radioSection": {
+            "customer": "I'm a customer",
+            "professional": "I'm a professional"
+        },
+        "submitButton": "Create Account",
+        "successMessage": "Successfully created account",
+        "errorMessage": "Error creating account"
+    },
+    "loginForm": {
+        "title": "Log in to SkillHub",
+        "fields": {
+            "username": {
+                "label": "Username",
+                "placeholder": "username",
+                "required": "User name is required"
             },
             "password": {
                 "label": "Password",
