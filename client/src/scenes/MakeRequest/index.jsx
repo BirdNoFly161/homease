@@ -6,23 +6,24 @@ import toast from "react-hot-toast";
 import InputField from "@/components/common/form/InputField";
 import { useTranslation } from "react-i18next";
 
-const RequestSchema = Yup.object().shape({
-  description: Yup.string().min(10, t("makeRequest.fields.description.minLength")),
-  category: Yup.string().required(t("makeRequest.fields.category.required")),
-  firstName: Yup.string().required(t("makeRequest.fields.firstName.required")),
-  lastName: Yup.string().required(t("makeRequest.fields.lastName.required")),
-  telephone: Yup.string().required(t("makeRequest.fields.telephone.required"))
-});
+
 
 export default function MakeRequest() {
   const location = useLocation();
   const navigate = useNavigate();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const booking = location.state?.booking; // booking passed from previous page
+  const RequestSchema = Yup.object().shape({
+    description: Yup.string().min(10, t("makeRequest.fields.description.minLength")),
+    category: Yup.string().required(t("makeRequest.fields.category.required")),
+    firstName: Yup.string().required(t("makeRequest.fields.firstName.required")),
+    lastName: Yup.string().required(t("makeRequest.fields.lastName.required")),
+    telephone: Yup.string().required(t("makeRequest.fields.telephone.required"))
+  });
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-      console.log("trying to send value with : ",values)
+      console.log("trying to send value with : ", values)
       if (booking?._id) {
         await API.put(`/bookings/update/${booking._id}`, values);
         toast.success(t("makeRequest.messages.success.edit"));
