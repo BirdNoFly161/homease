@@ -17,7 +17,7 @@ function NavBar() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.currentUser);
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const dropdownRef = useRef(null);
   const toggleDropdown = () => setIsOpen(prev => !prev);
   const onLogout = async () => {
     try {
@@ -76,7 +76,7 @@ function NavBar() {
           <Button variant="primary">{t("navbar.actions.postRequest")}</Button>
 
           {user ? (
-            <div className="relative inline-block">
+             <div className="relative inline-block" ref={dropdownRef}>
               {/* Avatar */}
               <div
                 onClick={toggleDropdown}
@@ -87,7 +87,7 @@ function NavBar() {
               {/* Dropdown */}
               {isOpen && (
                 <div
-                  className="absolute right-0 top-16 w-48 bg-[#111714] border border-[#29382f] rounded shadow-lg z-10 p-2"
+                  className="absolute right-0 top-16 w-64 bg-[#111714] border border-[#29382f] rounded shadow-lg z-10 p-2"
                 >
                   <button
                     onClick={onLogout}
