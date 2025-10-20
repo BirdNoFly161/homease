@@ -19,11 +19,11 @@ const HeroSection = () => {
       </div>
       <div className="w-full max-w-[480px]">
         {/*<SearchBar placeholder="Search for skills or categories" />*/}
-        <Link to="browse-professionals">
+        {/* <Link to="browse-professionals">
           <Button variant="primary">
             Browse our professionals !
           </Button>
-        </Link>
+        </Link> */}
       </div>
     </section>
   );

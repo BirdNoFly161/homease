@@ -11,7 +11,6 @@ import { setUser } from "@/redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
 
 function NavBar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const { t, i18 } = useTranslation()
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,9 +62,10 @@ function NavBar() {
           <Link className="text-white text-sm font-medium leading-normal" to="/browse-professionals">
             {t("navbar.links.browse")}
           </Link>
-          <Link className="text-white text-sm font-medium leading-normal" to="/requests">
+          {/* Remove requests tab */}
+          {/* <Link className="text-white text-sm font-medium leading-normal" to="/requests">
             {t("navbar.links.requests")}
-          </Link>
+          </Link> */}
         </div>
       </div>
 
@@ -73,7 +73,21 @@ function NavBar() {
         {/*<SearchBar placeholder="Search" small />*/}
         <LanguageSwitcher />
         <div className="flex gap-2 items-center">
-          <Button variant="primary">{t("navbar.actions.postRequest")}</Button>
+          { user? (
+            <Link to="make-request">
+              <Button variant="primary">
+                {t("navbar.actions.postRequest") || "Post Request"}
+              </Button>
+            </Link>
+          )
+            : (
+            <Link to="signup">
+              <Button variant="primary">
+                {t("navbar.actions.signup") || "Signup"}
+              </Button>
+            </Link>
+        )
+          }
 
           {user ? (
              <div className="relative inline-block" ref={dropdownRef}>
@@ -102,7 +116,7 @@ function NavBar() {
 
           ) : (
             <Link to="/login">
-              <Button variant="secondary" onClick={() => setIsLoggedIn(true)}>
+              <Button variant="secondary">
                 {t("navbar.actions.login")}
               </Button>
             </Link>

@@ -76,7 +76,7 @@ const LoginFormSection = () => {
       >
         {(formik) => (
           <form
-            className="layout-content-container flex flex-col w-[512px] max-w-[960px] py-5 flex-1 items-center"
+            className="layout-content-container flex flex-col w-[512px] max-w-[960px] py-5 items-center"
             onSubmit={formik.handleSubmit}
           >
             <div className="flex w-full max-w-[480px] flex-wrap items-end gap-4 px-4 py-3 justify-center">
@@ -103,7 +103,6 @@ const LoginFormSection = () => {
                 onChange={formik.handleChange} 
               />
             </div>
-            <div>
               {formik.touched.username && formik.errors.username ? (
                 <div className="bg-red-500 border-b-red-700 text-white">
                   {formik.errors.username}
@@ -114,10 +113,9 @@ const LoginFormSection = () => {
                   {formik.errors.password}
                 </div>
               ) : null}
-            </div>
             <div className="flex w-full max-w-[480px] px-4 py-3 justify-center">
               <button type="submit" className="flex min-w-[84px] w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#38e07b] text-white text-sm font-bold leading-normal tracking-[0.015em]">
-                <span className="truncate text-[#111714]">{formik.isSubmitting ? <Spinner /> : <span>{t("loginForm.loginButton")}</span>}</span>
+                <span className="truncate text-[#111714]">{formik.isSubmitting ? <Spinner /> : <span>{t("loginForm.submitButton")}</span>}</span>
               </button>
             </div>
 

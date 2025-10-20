@@ -32,6 +32,11 @@
             "title_1": "Join Homease as a Professional",
             "p_1": "Offer your skills and connect with clients seeking your expertise.",
             "b_1": "Browse our professionals !"
+        },
+        "actionSection": {
+            "browseProfessionals": "Browse Professionals",
+            "getStarted": "Get Started",
+            "postRequest": "Post a Request"
         }
     },
     "navbar": {
@@ -44,6 +49,7 @@
         },
         "actions": {
             "postRequest": "Post a request",
+            "signup": "Sign up",
             "login": "Log in"
         }
     },

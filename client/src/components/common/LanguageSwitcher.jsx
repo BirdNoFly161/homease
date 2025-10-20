@@ -1,32 +1,42 @@
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import Flag from "react-world-flags";
 
 const languages = [
-    { code: "en", label: "English", flagCode: "us" },
-    { code: "ar", label: "العربية" },
-    // Add more languages here if needed
+  { code: "en", label: "English", dir: "ltr" },
+  { code: "ar", label: "العربية", dir: "rtl" },
 ];
 
 const LanguageSwitcher = () => {
-    const { i18n } = useTranslation();
-    const currentLang = i18n.language;
+  const { i18n } = useTranslation();
+  const currentLang = i18n.language;
 
-    return (
-        <div className="flex items-center px-2 py-1">
-            <select
-                value={currentLang}
-                onChange={e => i18n.changeLanguage(e.target.value)}
-                className="bg-[#1c2620] text-[#9eb7a8] rounded-full px-3 py-1 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#38e07b]"
-            >
-                {languages.map(lang => (
-                    <option key={lang.code} value={lang.code}>
-                        {lang.label}
-                    </option>
-                ))}
-            </select>
+  useEffect(() => {
+    // Set HTML direction and language attributes
+    const lang = languages.find(l => l.code === currentLang);
+    document.documentElement.lang = lang?.code || "en";
+    document.documentElement.dir = lang?.dir || "ltr";
+  }, [currentLang]);
 
-        </div>
-    );
+  const handleChange = (e) => {
+    const newLang = e.target.value;
+    i18n.changeLanguage(newLang);
+  };
+
+  return (
+    <div className="flex items-center px-2 py-1">
+      <select
+        value={currentLang}
+        onChange={handleChange}
+        className="bg-[#1c2620] text-[#9eb7a8] rounded-full px-3 py-1 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-[#38e07b]"
+      >
+        {languages.map(lang => (
+          <option key={lang.code} value={lang.code}>
+            {lang.label}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
 };
 
 export default LanguageSwitcher;
