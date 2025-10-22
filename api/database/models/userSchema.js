@@ -14,6 +14,7 @@ const UserSchema = new Schema({
   email: String,
   telephone: String,
   password: String,
+  status: String,
   avatar: {
     type: String,
     default: function () {

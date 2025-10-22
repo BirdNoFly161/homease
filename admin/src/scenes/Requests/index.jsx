@@ -168,7 +168,7 @@ const Requests = () => {
                                 navigate("/requests")
                               }}
                             >
-                              {professionals.map((professional) => (<option key={professional._id} value={professional._id}>{professional.firstName} {professional.lastName}</option>))}F
+                              {professionals.map((professional) => (<option key={professional._id} value={professional._id}>{professional.firstName} {professional.lastName} {professional.status === "Active" ?  "🟢" : "🔴" }</option>))}F
                             </select>
                           }
                         </td>
