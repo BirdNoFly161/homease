@@ -21,7 +21,7 @@ function NavBar() {
         </Link>
         <div className="flex items-center gap-9">
           <Link className="text-white text-sm font-medium leading-normal" to="/browse-professionals">
-            Browse
+            Browse Professionals
           </Link>
           <Link className="text-white text-sm font-medium leading-normal" to="/requests">
             Requests
@@ -29,29 +29,6 @@ function NavBar() {
         </div>
       </div>
 
-      <div className="flex flex-1 justify-end gap-8">
-        <SearchBar placeholder="Search" small />
-        <div className="flex gap-2 items-center">
-          <Button variant="primary">Post a request</Button>
-
-          {user ? (
-            <Link to="/profile/dashboard">
-              <div
-                className="ml-2 bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
-                style={{
-                  backgroundImage: `url("${user.avatar}")`,
-                }}
-              ></div>
-            </Link>
-          ) : (
-            <Link to="/login">
-              <Button variant="secondary" onClick={() => setIsLoggedIn(true)}>
-                Log in
-              </Button>
-            </Link>
-          )}
-        </div>
-      </div>
     </header>
   );
 }
