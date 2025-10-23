@@ -8,8 +8,8 @@ if (environement === "development") {
 }
 
 if (environement === "production") {
-  apiURL = "https://top-pressing-api.vercel.app";
-  clientURL = "https://top-pressing.vercel.app/";
+  apiURL = "https://homeaseapi.vercel.app";
+  clientURL = "https://homease-swart.vercel.app/";
 }
 
 function getEnvironment() {

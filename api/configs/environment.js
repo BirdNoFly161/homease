@@ -15,7 +15,7 @@ let MULTER_UPLOAD;
 
 if (environment != "production") {
   dotenv.config();
-  clientURLS = ["http://localhost:5173"];
+  clientURLS = ["http://localhost:5173"]; 
   adminURLS = ["http://localhost:5174"];
   MULTER_UPLOAD = "temp/";
 } else {
