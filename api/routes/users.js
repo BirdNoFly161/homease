@@ -1,7 +1,7 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 
-import {User} from "../database/models/userSchema.js";
+import { User } from "../database/models/userSchema.js";
 import { secret, BLOB_READ_WRITE_TOKEN } from "../configs/environment.js";
 import passport from "passport";
 import multer from "multer";
@@ -192,9 +192,9 @@ router.post(
       const user = await User.findById(userId);
       if (!user) return res.status(404).json({ msg: "User not found" });
 
-      
+
       const filePath = path.join("temp/", req.file.filename);
-      
+
       const { url } = await put("user/image", fs.readFileSync(filePath), {
         access: "public",
         token: BLOB_READ_WRITE_TOKEN,
@@ -202,7 +202,7 @@ router.post(
 
       // Remove temp file after upload
       fs.unlinkSync(filePath);
-      
+
       user.category = category;
       user.description = about;
       user.avatar = url;
@@ -240,6 +240,9 @@ router.put(
       console.log("got user update body: ", req.body);
       if (req.body.reviews) {
         user.reviews = req.body.reviews;
+      }
+      if (req.body.status) {
+        user.status = req.body.status
       }
       await user.save();
       res.status(200).json({ user: user, msg: "user updated successfully" });

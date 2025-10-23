@@ -18,6 +18,7 @@ function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const toggleDropdown = () => setIsOpen(prev => !prev);
+  const [isToggled, setIsToggled] = useState(user?.status === "Active" ? true : false || false);
   const onLogout = async () => {
     try {
       let response = await API.post("/users/logout");
@@ -37,6 +38,10 @@ function NavBar() {
 
   };
 
+  useEffect(() => {
+    if (user) setIsToggled(user.status === 'Active' ? true : false)
+  }, [user])
+
   // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -48,6 +53,22 @@ function NavBar() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+
+
+  const handleToggle = async () => {
+    const newValue = !isToggled;
+    setIsToggled(newValue);
+    try {
+      let response = await API.put(`/users/${user._id}`, { ...user, status: newValue ? "Active" : "Inactive" });
+      if (response.status === 200) {
+        console.log(response)
+      }
+    }
+    catch (e) {
+      console.log(error)
+    }
+  };
 
   return (
     <header className="fixed w-full z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#29382f] px-10 py-3 bg-[#111714]">
@@ -73,7 +94,7 @@ function NavBar() {
         {/*<SearchBar placeholder="Search" small />*/}
         <LanguageSwitcher />
         <div className="flex gap-2 items-center">
-          { user? (
+          {user ? (
             <Link to="make-request">
               <Button variant="primary">
                 {t("navbar.actions.postRequest") || "Post Request"}
@@ -81,16 +102,44 @@ function NavBar() {
             </Link>
           )
             : (
-            <Link to="signup">
-              <Button variant="primary">
-                {t("navbar.actions.signup") || "Signup"}
-              </Button>
-            </Link>
-        )
+              <Link to="signup">
+                <Button variant="primary">
+                  {t("navbar.actions.signup") || "Signup"}
+                </Button>
+              </Link>
+            )
           }
 
           {user ? (
-             <div className="relative inline-block" ref={dropdownRef}>
+
+            <div className="flex relative inline-block" ref={dropdownRef}>
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <button
+                  onClick={handleToggle}
+                  style={{
+                    width: '50px',
+                    height: '26px',
+                    backgroundColor: isToggled ? '#4CAF50' : '#ccc',
+                    border: 'none',
+                    borderRadius: '13px',
+                    position: 'relative',
+                    cursor: 'pointer',
+                    transition: 'background-color 0.3s'
+                  }}
+                >
+                  <div style={{
+                    width: '22px',
+                    height: '22px',
+                    backgroundColor: 'white',
+                    borderRadius: '50%',
+                    position: 'absolute',
+                    top: '2px',
+                    left: isToggled ? '26px' : '2px',
+                    transition: 'left 0.3s'
+                  }} />
+                </button>
+              </div>
               {/* Avatar */}
               <div
                 onClick={toggleDropdown}
