@@ -22,16 +22,6 @@ const ProfileHeaderSection = ({
           </div>
         </div>
 
-        {/* Button */}
-        <button
-          type="button"
-          onClick={onBook}
-          className="flex items-center justify-center rounded-full h-10 px-6 bg-[#29382f] text-white text-sm font-bold leading-normal tracking-[0.015em] 
-             w-full sm:w-auto sm:shrink-0"
-          aria-label={t("userDetails.header.book")}
-        >
-          <span className="truncate">{t("userDetails.header.book")}</span>
-        </button>
       </div>
     </div>
   )
