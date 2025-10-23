@@ -75,7 +75,7 @@ function NavBar() {
       <div className="flex items-center gap-8">
         <Link className="flex items-center gap-4 text-white" to="/">
           <div className="size-16 rounded">
-            <img className="rounded-full" src="../../../public/homease_logo.jpg" />
+            <img className="rounded-full" src="/homease_logo.jpg" />
           </div>
           <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">{t("navbar.brand.title")}</h2>
         </Link>
