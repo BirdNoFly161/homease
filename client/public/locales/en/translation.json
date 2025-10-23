@@ -192,18 +192,27 @@
                 "required": "Telephone is required"
             },
             "category": {
-                "label": "Category (Optional)",
+                "label": "Category",
                 "placeholder": "Select a category",
                 "required": "Please select a category",
                 "options": {
                     "web-dev": "Web Development",
                     "graphics-design": "Graphics Design",
                     "content-writing": "Content Writing",
+                    "gardener": "Gardener",
+                    "translation": "Translation",
+                    "psychologist": "Psychologist",
+                    "it-specialist": "IT Specialist",
+                    "plumber": "Plumber",
+                    "electrician": "Electrician",
+                    "needle-nurse": "Needle Nurse",
+                    "pet-caretaker": "Pet Caretaker",
+                    "glass-cleaning": "Glass Cleaning",
                     "other": "Other"
                 }
             },
             "description": {
-                "label": "Description",
+                "label": "Description (Optional)",
                 "placeholder": "Provide a detailed description...",
                 "minLength": "Description must be at least 10 characters"
             }

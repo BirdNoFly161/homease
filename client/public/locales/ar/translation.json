@@ -15,12 +15,12 @@
                 },
                 {
                     "name": "عادل بن منصور",
-                    "role": "طبيب نفسي",
+                    "role": "أخصائي نفسي",
                     "img": "https://nsvzogblporeptlk.public.blob.vercel-storage.com/user/image-uwzsnDcO3Va6DAcFEq24CBVuJVkNHi"
                 },
                 {
                     "name": "نبيل جاري",
-                    "role": "أخصائي ترجمة/طبيب نفسي",
+                    "role": "أخصائي ترجمة/أخصائي نفسي",
                     "img": "https://lh3.googleusercontent.com/aida-public/AB6AXuCoydEavwCtjCyS7H8jfAibJ_4leGGWoqWdrzMPfNG8BsDEMdDhsHA-nCXfbv8wwb-oYP6C5M-caG5mUaL7KMOgaDvjUFYGuIz3-nRK8XI1zzp85MkzGaDzdzrk8Xzbp1GKmeQ-44kRRuB1xS33SbaD1smEAsMscBLLoNEzEU70k4lHxlPY65IRKA45k2R3FEZF3kM10HAYoZco2S8HeISTnQyB6KrxJbHTKnOyqDNgKpqTivMBvnI6zX-sWEPAUCJZIEfELX67PBm4"
                 }
             ]
@@ -34,10 +34,9 @@
             "b_1": "تصفح محترفينا!"
         },
         "actionSection": {
-            "browseProfessionals": "تصفح المتخصصين",
+            "browseProfessionals": "تصفح المحترفين",
             "getStarted": "ابدأ الآن",
             "postRequest": "انشر طلباً"
-
         }
     },
     "navbar": {
@@ -50,7 +49,7 @@
         },
         "actions": {
             "postRequest": "انشر طلباً",
-            "signup": "إنشاء حساب",
+            "signup": "سجل حساباً",
             "login": "تسجيل الدخول"
         }
     },
@@ -67,12 +66,12 @@
             "status": "الحالة"
         },
         "status": {
-            "assigned": "مُعيَّن",
-            "notAssigned": "غير مُعيَّن"
+            "assigned": "معيّن",
+            "notAssigned": "غير معيّن"
         },
         "actions": {
             "delete": "حذف",
-            "edit": "تحرير"
+            "edit": "تعديل"
         }
     },
     "signupForm": {
@@ -149,7 +148,7 @@
         "about": "نبذة عني",
         "experience": "الخبرة",
         "rating": {
-            "title": "قيم المحترف",
+            "title": "قيّم المحترف",
             "rate": "التقييم",
             "review": "المراجعة",
             "submit": "إرسال المراجعة",
@@ -174,7 +173,7 @@
         },
         "subtitle": {
             "new": "املأ النموذج أدناه لإرسال طلب جديد.",
-            "edit": "قم بتحديث حجزك أدناه."
+            "edit": "حدّث حجزك أدناه."
         },
         "fields": {
             "firstName": {
@@ -193,19 +192,28 @@
                 "required": "رقم الهاتف مطلوب"
             },
             "category": {
-                "label": "الفئة (اختياري)",
+                "label": "الفئة",
                 "placeholder": "اختر فئة",
-                "required": "الرجاء اختيار فئة",
+                "required": "يرجى اختيار فئة",
                 "options": {
                     "web-dev": "تطوير الويب",
-                    "graphics-design": "تصميم الرسومات",
+                    "graphics-design": "التصميم الجرافيكي",
                     "content-writing": "كتابة المحتوى",
+                    "gardener": "بستاني",
+                    "translation": "ترجمة",
+                    "psychologist": "أخصائي نفسي",
+                    "it-specialist": "أخصائي تكنولوجيا المعلومات",
+                    "plumber": "سباك",
+                    "electrician": "كهربائي",
+                    "needle-nurse": "ممرض حقن",
+                    "pet-caretaker": "مربي حيوانات أليفة",
+                    "glass-cleaning": "تنظيف الزجاج",
                     "other": "أخرى"
                 }
             },
             "description": {
-                "label": "الوصف",
-                "placeholder": "قدم وصفاً مفصلاً...",
+                "label": "الوصف (اختياري)",
+                "placeholder": "قدّم وصفاً تفصيلياً...",
                 "minLength": "يجب أن يحتوي الوصف على 10 أحرف على الأقل"
             }
         },
@@ -215,10 +223,10 @@
         },
         "messages": {
             "success": {
-                "new": "تم إرسال الطلب بنجاح",
-                "edit": "تم تحديث الحجز بنجاح"
+                "new": "تم إرسال الطلب",
+                "edit": "تم تحديث الحجز"
             },
-            "error": "حدث خطأ أثناء إرسال الطلب"
+            "error": "خطأ في إرسال الطلب"
         }
     }
 }

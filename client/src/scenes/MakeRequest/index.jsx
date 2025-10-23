@@ -70,10 +70,19 @@ export default function MakeRequest() {
               <div>
                 <label htmlFor="category" className="block text-sm font-medium text-white mb-2">{t("makeRequest.fields.category.label")}</label>
                 <Field as="select" name="category" className="w-full rounded-md p-3 bg-[#111714] text-white border border-[#29382f]">
-                  <option value="">{t("makeRequest.fields.category.palceholder")}</option>
+                  <option value="">{t("makeRequest.fields.category.placeholder")}</option>
                   <option value="web-dev">{t("makeRequest.fields.category.options.web-dev")}</option>
                   <option value="graphics-design">{t("makeRequest.fields.category.options.graphics-design")}</option>
                   <option value="content-writing">{t("makeRequest.fields.category.options.content-writing")}</option>
+                  <option value="gardener">{t("makeRequest.fields.category.options.gardener")}</option>
+                  <option value="translation">{t("makeRequest.fields.category.options.translation")}</option>
+                  <option value="psychologist">{t("makeRequest.fields.category.options.psychologist")}</option>
+                  <option value="it-specialist">{t("makeRequest.fields.category.options.it-specialist")}</option>
+                  <option value="plumber">{t("makeRequest.fields.category.options.plumber")}</option>
+                  <option value="electrician">{t("makeRequest.fields.category.options.electrician")}</option>
+                  <option value="needle-nurse">{t("makeRequest.fields.category.options.needle-nurse")}</option>
+                  <option value="pet-caretaker">{t("makeRequest.fields.category.options.pet-caretaker")}</option>
+                  <option value="glass-cleaning">{t("makeRequest.fields.category.options.glass-cleaning")}</option>
                   <option value="other">{t("makeRequest.fields.category.options.other")}</option>
                 </Field>
                 <ErrorMessage name="category" component="div" className="text-red-500 mt-1" />
@@ -85,7 +94,7 @@ export default function MakeRequest() {
                   as="textarea"
                   name="description"
                   className="w-full rounded-md p-3 bg-[#111714] text-white border border-[#29382f] h-80 resize-y"
-                  placeholder={t("makeRequest.fields.category.description.placeholder")}
+                  placeholder={t("makeRequest.fields.description.placeholder")}
                 />
                 <ErrorMessage name="description" component="div" className="text-red-500 mt-1" />
               </div>
