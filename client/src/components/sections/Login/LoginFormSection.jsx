@@ -61,7 +61,7 @@ const LoginFormSection = () => {
               setSubmitting(false);
               dispatch(setAuthToken(response.data.token));
               console.log(response);
-              navigate("/browse-professionals");
+              navigate("/");
               toast.success(t("loginForm.successMessage"));
             
             }

@@ -80,9 +80,6 @@ function NavBar() {
           <h2 className="text-white text-lg font-bold leading-tight tracking-[-0.015em]">{t("navbar.brand.title")}</h2>
         </Link>
         <div className="flex items-center gap-9">
-          <Link className="text-white text-sm font-medium leading-normal" to="/browse-professionals">
-            {t("navbar.links.browse")}
-          </Link>
           {/* Remove requests tab */}
           {/* <Link className="text-white text-sm font-medium leading-normal" to="/requests">
             {t("navbar.links.requests")}
