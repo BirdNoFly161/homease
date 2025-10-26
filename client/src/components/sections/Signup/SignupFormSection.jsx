@@ -164,7 +164,6 @@ const SignupFormSection = () => {
                 ) : null}
               </div>
             </div>
-            <RadioSection />
             <div className="py-3">
               <button type="submit" className="w-full flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-[#38e07b] text-[#111714] text-sm font-bold leading-normal tracking-[0.015em]">
                 <span className="truncate">{formik.isSubmitting ? <Spinner /> : <span>{t("signupForm.submitButton")}</span>}</span>
