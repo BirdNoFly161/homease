@@ -9,21 +9,24 @@ const ActionSection = () => {
 
   return (
     <section className="flex flex-col items-center justify-center gap-6 py-12 px-4">
+      <h2 className="text-white text-[22px] font-bold pb-3">{t("landing.actionSection.letsGetStarted")}</h2>
       <div className="flex flex-wrap justify-center center w-full">
 
-        {user ? (
+        <div className="flex gap-4">
           <Link to="make-request" className="flex min-w-[400px]">
             <Button variant="invert" className="w-full h-12">
-              {t("landing.actionSection.postRequest") || "Post a Request"}
+              {t("landing.actionSection.serviceSeeker") || "Post a Request"}
             </Button>
           </Link>
-        ) : (
+
           <Link to="signup" className="flex min-w-[400px]">
             <Button variant="invert" className="w-full h-12">
-              {t("landing.actionSection.getStarted") || "Get Started"}
+              {t("landing.actionSection.serviceProvider") || "Get Started"}
             </Button>
           </Link>
-        )}
+        </div>
+
+
       </div>
     </section>
   );

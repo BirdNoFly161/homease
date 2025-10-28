@@ -34,6 +34,9 @@
             "b_1": "Browse our professionals !"
         },
         "actionSection": {
+            "letsGetStarted": "Let's get started !",
+            "serviceSeeker":"Are you a service seeker ?",
+            "serviceProvider": "Are you a service provider ?",
             "browseProfessionals": "Browse Professionals",
             "getStarted": "Get Started",
             "postRequest": "Post a Request"

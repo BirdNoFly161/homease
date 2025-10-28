@@ -34,6 +34,9 @@
             "b_1": "تصفح محترفينا!"
         },
         "actionSection": {
+            "letsGetStarted": "لنبدأ!",
+            "serviceSeeker": "هل أنت تبحث عن خدمة؟",
+            "serviceProvider": "هل أنت مقدم خدمة؟",
             "browseProfessionals": "تصفح المحترفين",
             "getStarted": "ابدأ الآن",
             "postRequest": "انشر طلباً"
