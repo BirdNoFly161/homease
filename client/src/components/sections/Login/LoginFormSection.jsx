@@ -7,7 +7,7 @@ import API from "@/api";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { setAuthToken } from "@/redux/user/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setUser } from "@/redux/user/userSlice";
 import { useTranslation } from "react-i18next";
 
@@ -118,11 +118,11 @@ const LoginFormSection = () => {
                 <span className="truncate text-[#111714]">{formik.isSubmitting ? <Spinner /> : <span>{t("loginForm.submitButton")}</span>}</span>
               </button>
             </div>
-
-
-            <p className="text-[#b89d9f] text-sm font-normal leading-normal pb-3 pt-1 px-4 underline text-center">
-              {t("loginForm.forgotPassword")}
-            </p>
+            <Link to="/send-password-reset">
+              <p className="text-[#b89d9f] text-sm font-normal leading-normal pb-3 pt-1 px-4 underline text-center">
+                {t("loginForm.forgotPassword")}
+              </p>
+            </Link>
 
           </form>
         )}

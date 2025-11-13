@@ -30,6 +30,9 @@ const env_config = {
   dbPassword: process.env.DB_PASSWORD,
   dbCluster: process.env.DB_CLUSTER,
   dbName: process.env.DB_NAME,
+  smtpUser: process.env.SMTP_USER,
+  smtpKey: process.env.SMTP_KEY,
+  senderEmail: process.env.SENDER_EMAIL,
 }
 
 export {

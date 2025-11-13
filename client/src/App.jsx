@@ -13,6 +13,8 @@ import "./App.css";
 import CreateProfile from "./scenes/CreateProfile";
 import Requests from "./scenes/Requests";
 import MakeRequest from "./scenes/MakeRequest";
+import SendPasswordReset from "./scenes/SendPasswordReset";
+import ChangePassword from "./scenes/ChangePassword/ChangePassword";
 
 function App() {
   const router = createBrowserRouter([
@@ -48,6 +50,14 @@ function App() {
         {
           path: "/make-request",
           element: <MakeRequest />
+        },
+        {
+          path: "/send-password-reset",
+          element: <SendPasswordReset />,
+        },
+        {
+          path: "/change-password",
+          element: <ChangePassword />,
         },
         {
           path: "/profile",

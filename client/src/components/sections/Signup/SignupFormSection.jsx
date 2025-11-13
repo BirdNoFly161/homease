@@ -21,6 +21,7 @@ const SignupFormSection = () => {
       <Formik
         //can i do a funciton here that sets the user using useState and return the object so it can work with the formik prop aswell?
         initialValues={{
+          email: "test@example.com",
           username: "oussama161",
           firstName: "Oussama",
           lastName: "Benmansour",
@@ -29,6 +30,7 @@ const SignupFormSection = () => {
           role: "professional"
         }}
         validationSchema={Yup.object({
+          email: Yup.string().required(t("signupForm.fields.email.required")),
           username: Yup.string().required(t("signupForm.fields.username.required")),
           firstName: Yup.string().required(t("signupForm.fields.firstName.required")),
           lastName: Yup.string().required(t("signupForm.fields.lastName.required")),
@@ -69,6 +71,18 @@ const SignupFormSection = () => {
             onSubmit={formik.handleSubmit}
           >
             <div className="flex flex-col gap-3 w-full">
+              <div className="py-1">
+                <InputField
+                  id="email"
+                  name="email"
+                  label={t("signupForm.fields.email.label")}
+                  type="text"
+                  placeholder={t("signupForm.fields.email.placeholder")}
+                  value={formik.values.email}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                />
+              </div>
               <div className="py-1">
                 <InputField
                   id="username"

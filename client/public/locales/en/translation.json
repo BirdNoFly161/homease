@@ -80,6 +80,11 @@
     "signupForm": {
         "title": "Create your account",
         "fields": {
+            "email": {
+                "label": "Email",
+                "placeholder": "email",
+                "required": "Email is required"
+            },
             "username": {
                 "label": "Username",
                 "placeholder": "username",
@@ -118,6 +123,36 @@
         "submitButton": "Create Account",
         "successMessage": "Successfully created account",
         "errorMessage": "Error creating account"
+    },
+    "sendPasswordReset": {
+        "title": "Reset password",
+        "fields": {
+            "email": {
+                "label": "Email",
+                "placeholder": "email",
+                "required": "Email is required"
+            }
+        },
+        "submitButton": "Send",
+        "successMessage": "Reset email sent!",
+        "errorMessage": "Error sending reset email!"
+    },
+    "changePassword": {
+        "title": "Enter new password",
+        "fields": {
+            "password": {
+                "label": "Password",
+                "placeholder": "password",
+                "required": "Password is required",
+                "uppercase": "Password must contain at least one uppercase letter",
+                "lowercase": "Password must contain at least one lowercase letter",
+                "number": "Password must contain at least one number",
+                "symbol": "Password must contain at least one symbol"
+            }
+        },
+        "submitButton": "Confirm",
+        "successMessage": "Password changed!",
+        "errorMessage": "Error reseting password!"
     },
     "loginForm": {
         "title": "Log in to Homease",

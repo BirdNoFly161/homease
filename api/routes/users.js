@@ -1,8 +1,10 @@
 import express from "express";
 import jwt from "jsonwebtoken";
+import nodemailer from "nodemailer";
 
 import { User } from "../database/models/userSchema.js";
-import { secret, BLOB_READ_WRITE_TOKEN } from "../configs/environment.js";
+import { secret, BLOB_READ_WRITE_TOKEN, clientURLS } from "../configs/environment.js";
+import { env_config } from "../configs/environment.js";
 import passport from "passport";
 import multer from "multer";
 import fs from "fs";
@@ -112,15 +114,71 @@ router.post("/login", async function login_user(req, res) {
   }
 });
 
+router.post("/change-password", async function change_password(req, res){
+  try {
+    let token = req.body.token;
+    const payload = jwt.verify(token, secret);
+    let user = await User.findOne({ email: payload.email });
+    if (!user) {
+      return res.status(404).json({ msg: "no such user" });
+    }
+    //Change this to bcrypt or something later
+    user.password = req.body.password;
+    await user.save()
+    console.log("New password saved");
+    res.status(200).json({ msg: "New password saved!" });;
+  } catch (error) {
+    res.status(500).send("Invalid token!");
+  }
+});
+
+router.post("/reset-password", async function reset_password(req, res){
+  try {
+    console.log("Attempting to process!")
+    console.log(req.body);
+    if (!req.body.email) {
+      return res.status(400).json({ msg: "Email is required" });
+    }
+    let user = await User.findOne({ email: req.body.email });
+    console.log(req.body.email);
+    if (!user) {
+      return res.status(404).json({ msg: "no such user" });
+    }
+    let token = jwt.sign({ email: req.body.email }, secret, {expiresIn:"15m"});
+    const resetPasswordUrl = `${clientURLS[0]}/change-password?token=${token}`;
+    console.log(user);
+    const text = `Dear user,
+    To reset your password, click on this link: ${resetPasswordUrl}
+    If you did not request any password resets, then ignore this  email.`;
+    let transporter = nodemailer.createTransport({
+      host: "smtp-relay.brevo.com",
+      port: 587,
+      secure: false,
+      auth: {
+        user: env_config.smtpUser,
+        pass: env_config.smtpKey,
+      },
+    });
+    let info = await transporter.sendMail({
+      from: `"Homease" <${env_config.senderEmail}>`,
+      to: req.body.email,
+      subject: "Password Reset!",
+      text: text,
+    });
+    console.log("Message sent: %s", info.messageId);
+    res.status(200).json({ msg: "Email sent!" });
+  } catch (error) {
+    res.status(500).json({ msg: "Server error" });;
+  }
+});
+
 router.patch("/", async function update_user(req, res) {
   try {
     let users = req.body.users;
-
     for (let i = 0; i < users.length; i++) {
       let user = await User.findOneAndUpdate({ _id: users[i]._id }, users[i]);
       console.log("updated user: ", user);
     }
-
     res.status(200);
   } catch (err) {
     console.log("error querying database");
