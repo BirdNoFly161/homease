@@ -110,7 +110,7 @@ export default function NavBar() {
               />
             </button>
 
-            <div className="absolute right-2 text-s text-white mb-3">Status: {isToggled ? "Active" : "Inactive"}</div>
+            <div className={`absolute ${isRTL ? "left-2" : "right-2"} text-s text-white mb-3`}>Status: {isToggled ? "Active" : "Inactive"}</div>
           </div>
           <Link to="make-request" onClick={onClickItem}>
             <Button variant="primary" className="w-full">
