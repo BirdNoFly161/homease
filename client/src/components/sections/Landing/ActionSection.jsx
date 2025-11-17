@@ -12,14 +12,14 @@ const ActionSection = () => {
       <h2 className="text-white text-[22px] font-bold pb-3">{t("landing.actionSection.letsGetStarted")}</h2>
       <div className="flex flex-wrap justify-center center w-full">
 
-        <div className="flex gap-4">
-          <Link to="make-request" className="flex min-w-[400px]">
+        <div className="flex flex-col md:flex-row gap-4">
+          <Link to="make-request" className="flex min-w-[360px]">
             <Button variant="invert" className="w-full h-12">
               {t("landing.actionSection.serviceSeeker") || "Post a Request"}
             </Button>
           </Link>
 
-          <Link to="signup" className="flex min-w-[400px]">
+          <Link to="signup" className="flex min-w-[360px]">
             <Button variant="invert" className="w-full h-12">
               {t("landing.actionSection.serviceProvider") || "Get Started"}
             </Button>
